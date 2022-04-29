@@ -1,10 +1,12 @@
 package com.example.regatas.fragments.ships
 
+import android.app.Activity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -27,6 +29,10 @@ class ShipFragment : Fragment() {
 //        setHasOptionsMenu(true)
         binding = FragmentShipBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity?)!!.setSupportActionBar(binding.icontoolbar)
+        (activity as AppCompatActivity?)!!.getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity?)!!.getSupportActionBar()?.setTitle("Barcos")
+
+
 
         binding.autoCompleteTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

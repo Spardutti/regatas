@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Regatas">
         <activity
+            android:name=".ShipActivity"
+            android:exported="false" />
+        <activity
             android:name=".splashscreen.SplashActivity"
             android:exported="false" />
         <activity

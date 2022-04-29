@@ -16,40 +16,11 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         val navController = this.findNavController(R.id.nav_host)
 
-
-
         NavigationUI.setupActionBarWithNavController(this, navController)
-
-//        val homeFragment = HomeFragment()
-////        val raceFragment = RaceFragment()
-//        val shipFragment = ShipFragment()
-////        makeCurrentFragment(homeFragment)
-
-
-//        binding.nav.setOnItemSelectedListener {
-//            when (it.itemId) {
-//                R.id.home -> makeCurrentFragment(homeFragment)
-////                R.id.ic_history -> makeCurrentFragment(raceFragment)
-//                R.id.ships -> makeCurrentFragment(shipFragment)
-//            }
-//            true
-//        }
-//
-//
-//        binding.nav.menu.findItem(R.id.home).isChecked = true
-
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = this.findNavController(R.id.nav_host)
         return navController.navigateUp()
     }
-
-//    private fun makeCurrentFragment(fragment: Fragment) =
-//        supportFragmentManager.beginTransaction().apply {
-//            replace(R.id.main_layout, fragment)
-//            addToBackStack(null)
-//            commit()q
-//        }
-
 }

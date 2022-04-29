@@ -19,7 +19,6 @@
     <fragment
         android:id="@+id/shipFragment"
         android:name="com.example.regatas.fragments.ships.ShipFragment"
-        android:label="@string/barcos"
         tools:layout="@layout/fragment_ship">
         <action
             android:id="@+id/action_shipFragment_to_addShipFragment"
