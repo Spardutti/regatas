@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="30sp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/red"
+    android:id="@+id/icontoolbar">
+
+
+
+        <ImageView
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_back_arrow"
+            />
+
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ImageView
+            android:id="@+id/export"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:src="@drawable/ic_export"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginHorizontal="16dp"
+            app:layout_constraintEnd_toStartOf="@id/delete" />
+
+
+
+</androidx.appcompat.widget.Toolbar>

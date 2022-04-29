@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">regatas</string>
+    <string name="regatas">Regatas</string>
+    <string name="carreras">Carreras</string>
+    <string name="barcos">Barcos</string>
+    <string name="registro_de_regatas">Registro de regatas</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="agregar_barcos">Agregar Barcos</string>
+    <string name="datos">Datos</string>
+</resources>
