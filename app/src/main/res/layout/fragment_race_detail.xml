@@ -4,25 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="16dp"
     tools:context=".fragments.races.RaceDetailFragment">
-
-
-    <TextView
-        android:id="@+id/title"
-        style="@style/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Carrera Name" />
-
 
     <ImageView
         android:id="@+id/image_startStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
         android:src="@drawable/ic_timer_start"
         app:layout_constraintBottom_toBottomOf="@id/chronoRaceTime"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,20 +19,34 @@
     <Chronometer
         android:id="@+id/chronoRaceTime"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="88dp"
+        android:gravity="center"
         android:layout_marginTop="24dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edit_searchShip"
+        style="@style/input_style"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/chronoRaceTime"
+        android:layout_marginTop="16dp"
+        android:hint="Buscar Barco"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="24dp"
         android:id="@+id/recyclerRaceShipList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/chronoRaceTime" />
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_searchShip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,102 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="16dp"
     tools:context=".fragments.ships.ShipFragment">
-
-<!--    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
-<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
-<!--        android:id="@+id/icontoolbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/red"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent">-->
-
-<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content">-->
-
-
-<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
-<!--&lt;!&ndash;                android:id="@+id/back_arrow"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_width="25sp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:layout_height="25sp"&ndash;&gt;-->
-<!--&lt;!&ndash;                android:src="@drawable/ic_back_arrow"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/delete"-->
-<!--                android:layout_width="25sp"-->
-<!--                android:layout_height="25sp"-->
-<!--                android:src="@drawable/ic_delete"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toEndOf="parent" />-->
-
-<!--            <ImageView-->
-<!--                android:id="@+id/export"-->
-<!--                android:layout_width="25sp"-->
-<!--                android:layout_height="25sp"-->
-<!--                android:layout_marginHorizontal="16dp"-->
-<!--                android:src="@drawable/ic_export"-->
-<!--                app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                app:layout_constraintEnd_toStartOf="@id/delete" />-->
-
-
-<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    </androidx.appcompat.widget.Toolbar>-->
-
-    <TextView
-        android:id="@+id/textView4"
-        style="@style/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/barcos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icontoolbar" />
-
-    <!--    <ImageView-->
-    <!--        android:layout_width="15dp"-->
-    <!--        android:layout_height="18dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:src="@drawable/ic_export"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/textView4"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/btnDeleteShip"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/textView4" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/btnDeleteShip"-->
-    <!--        android:layout_width="15dp"-->
-    <!--        android:layout_height="18dp"-->
-    <!--        android:layout_marginEnd="16dp"-->
-    <!--        android:src="@drawable/ic_delete"-->
-    <!--        app:layout_constraintBottom_toBottomOf="@+id/textView4"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/textView4" />-->
 
     <EditText
         android:id="@+id/autoCompleteTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="23dp"
+        android:background="@drawable/input_field"
+        android:drawableEnd="@drawable/ic_search"
         android:hint="Buscar barcos"
         android:inputType="text"
         android:maxLines="1"
-        android:textAlignment="center"
-        android:textColor="#FA737373"
+        android:padding="16dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAddShip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="33dp"
         android:contentDescription="add ship"
         android:src="@drawable/ic_add"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -109,10 +40,19 @@
         android:id="@+id/recyclerShip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="400dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
+
+<!--    <ImageView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:background="#2DFAFAFA"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

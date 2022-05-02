@@ -4,39 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
+  android:layout_marginBottom="50dp"
     >
 
 
     <ImageView
         android:id="@+id/image_shipImg"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_ship"
-        app:layout_constraintBottom_toBottomOf="@id/text_shipName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_circle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/text_shipName" />
+        android:layout_marginStart="19.5dp"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/text_shipName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
+        android:layout_marginStart="25dp"
+        android:textSize="16sp"
+        android:textColor="@color/black"
         android:textStyle="bold"
-        tools:text="ShipName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/image_shipImg"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        tools:text="ShipName" />
 
     <ImageView
         android:id="@+id/image_editShip"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:src="@drawable/ic_flag"
-        tools:layout_height="30dp"
-        tools:layout_width="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_edit"
+        android:layout_marginEnd="40.5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_shipName"
         app:layout_constraintBottom_toBottomOf="@id/text_shipName"

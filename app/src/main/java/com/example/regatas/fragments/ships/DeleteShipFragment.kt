@@ -28,7 +28,6 @@ class DeleteShipFragment : Fragment() {
             DeleteShipAdapter(shipList).removeAllShips(it.context)
             binding.recyclerDeleteShip.adapter?.notifyDataSetChanged()
         }
-
         return binding.root
     }
 

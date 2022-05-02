@@ -7,7 +7,7 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class RaceData(
-    val name: String,
+    var name: String,
     val date: String,
     var time: String?,
     val shipsList: @RawValue MutableList<ShipData>?,

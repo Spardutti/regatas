@@ -3,49 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="50dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+
+    <ImageView
+        android:id="@+id/image_shipImg"
+        android:layout_width="58dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="19.5dp"
+        android:background="@drawable/ic_circle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
 
+        />
 
-        <ImageView
-            android:id="@+id/image_shipImg"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:src="@drawable/ic_ship"
-            tools:layout_height="30dp"
-            tools:layout_width="30dp" />
+    <TextView
+        android:id="@+id/text_shipName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/image_shipImg"
+        app:layout_constraintStart_toEndOf="@id/image_shipImg"
 
-        <TextView
-            android:id="@+id/text_shipName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:textAlignment="center"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            tools:text="ShipName" />
+        app:layout_constraintTop_toTopOf="@id/image_shipImg"
+        tools:text="ShipName" />
 
-        <ImageView
-            android:id="@+id/image_deleteShip"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_weight="1"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_deleteship"
-            tools:layout_height="30dp"
-            tools:layout_width="30dp" />
-
-    </LinearLayout>
+    <ImageView
+        android:id="@+id/image_deleteShip"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="47.5sp"
+        android:layout_weight="1"
+        android:src="@drawable/ic_deleteship"
+        app:layout_constraintBottom_toBottomOf="@id/image_shipImg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/image_shipImg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

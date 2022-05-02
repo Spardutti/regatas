@@ -44,7 +44,7 @@ class Prefs(val context: Context) {
         return null
     }
 
-    fun getSingleRace(race: RaceData, raceName: String) {
+    fun updateRace(race: RaceData, raceName: String) {
         val gson = Gson()
         val json = storage.getString(Constants.RACE_LIST, null)
         val type = object : TypeToken<MutableList<RaceData>>() {}.type

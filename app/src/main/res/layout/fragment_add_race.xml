@@ -4,95 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.races.AddRaceFragment"
-    android:layout_marginHorizontal="16dp">
+    tools:context=".fragments.races.AddRaceFragment">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar Carrera"
+    <EditText
+        android:id="@+id/editName"
+        style="@style/input_style"
+        android:hint="Nombre"
+        android:importantForAutofill="no"
+        android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="@string/datos"
-        android:textSize="25sp"
+
+    <EditText
+        android:id="@+id/editDate"
+        style="@style/input_style"
+        android:focusable="false"
+        android:hint="Fecha"
+        android:inputType="date"
+
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/editName" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="59dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
-        tools:layout_editor_absoluteX="0dp">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Nombre:"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Nombre"
-                android:importantForAutofill="no"
-                android:inputType="text"
-                android:minWidth="100dp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="Fecha:"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/editDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Fecha"
-                android:clickable="false"
-                android:focusable="false"
-                android:importantForAutofill="no"
-                android:inputType="date"
-                android:minWidth="100dp" />
-
-        </LinearLayout>
-
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnAddRace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
-        android:text="Guardar"
+        android:drawableLeft="@drawable/ic_add"
+        android:drawableTint="@color/white"
+        android:text="Agregar carrera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@id/editDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

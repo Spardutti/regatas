@@ -22,10 +22,13 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.raceTime.text = raceList.time
         val pos = layoutPosition
 
+        binding.editRaceName.setOnClickListener {
+            raceInt.editRace(it.context, raceList.name, raceList)
+        }
 
         binding.raceItem.setOnClickListener {
             val race = raceInt.getRaceInfo(raceList)
-            val parsedData = Gson().toJson(race, object: TypeToken<RaceData>(){}.type)
+            val parsedData = Gson().toJson(race, object : TypeToken<RaceData>() {}.type)
 
             val bundle = Bundle()
             bundle.putString("raceInfo", parsedData)
