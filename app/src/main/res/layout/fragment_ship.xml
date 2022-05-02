@@ -7,49 +7,49 @@
     android:layout_marginHorizontal="16dp"
     tools:context=".fragments.ships.ShipFragment">
 
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/icontoolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+<!--    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        android:id="@+id/icontoolbar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:background="@color/red"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent">-->
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
+
+<!--&lt;!&ndash;            <ImageView&ndash;&gt;-->
+<!--&lt;!&ndash;                android:id="@+id/back_arrow"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_width="25sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:layout_height="25sp"&ndash;&gt;-->
+<!--&lt;!&ndash;                android:src="@drawable/ic_back_arrow"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintStart_toStartOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                app:layout_constraintTop_toTopOf="parent" />&ndash;&gt;-->
 
 <!--            <ImageView-->
-<!--                android:id="@+id/back_arrow"-->
+<!--                android:id="@+id/delete"-->
 <!--                android:layout_width="25sp"-->
 <!--                android:layout_height="25sp"-->
-<!--                android:src="@drawable/ic_back_arrow"-->
-<!--                app:layout_constraintStart_toStartOf="parent"-->
-<!--                app:layout_constraintTop_toTopOf="parent" />-->
+<!--                android:src="@drawable/ic_delete"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent" />-->
 
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:src="@drawable/ic_delete"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <ImageView
-                android:id="@+id/export"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:layout_marginHorizontal="16dp"
-                android:src="@drawable/ic_export"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/delete" />
+<!--            <ImageView-->
+<!--                android:id="@+id/export"-->
+<!--                android:layout_width="25sp"-->
+<!--                android:layout_height="25sp"-->
+<!--                android:layout_marginHorizontal="16dp"-->
+<!--                android:src="@drawable/ic_export"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toStartOf="@id/delete" />-->
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-    </androidx.appcompat.widget.Toolbar>
+<!--    </androidx.appcompat.widget.Toolbar>-->
 
     <TextView
         android:id="@+id/textView4"

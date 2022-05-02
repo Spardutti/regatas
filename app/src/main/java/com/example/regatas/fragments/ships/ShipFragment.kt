@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
 import com.example.regatas.adapters.ships.ShipAdapter
@@ -24,9 +25,8 @@ class ShipFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-//        setHasOptionsMenu(true)
+        setHasOptionsMenu(true)
         binding = FragmentShipBinding.inflate(inflater, container, false)
-        (activity as AppCompatActivity?)!!.setSupportActionBar(binding.icontoolbar)
 
         binding.autoCompleteTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -44,19 +44,6 @@ class ShipFragment : Fragment() {
             Navigation.createNavigateOnClickListener(R.id.action_shipFragment_to_addShipFragment)
         )
 
-//        binding.btnDeleteShip.setOnClickListener(
-//            Navigation.createNavigateOnClickListener(R.id.action_shipFragment_to_deleteShipFragment)
-//        )
-
-        binding.delete.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_shipFragment_to_deleteShipFragment)
-        )
-
-//        binding.backArrow.setOnClickListener {
-//            Navigation.createNavigateOnClickListener(R.id.action_shipFragment_to_homeFragment)
-//        }
-
-
         shipRecyclerView()
 
         return binding.root
@@ -68,20 +55,22 @@ class ShipFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val navhostFragment =
+            activity?.supportFragmentManager?.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navController = navhostFragment.navController
+
         return when (item.itemId) {
             R.id.delete -> {
-            Navigation.createNavigateOnClickListener(R.id.action_shipFragment_to_deleteShipFragment)
+                navController.navigate(R.id.deleteShipFragment)
                 true
             }
             R.id.export -> {
-                Toast.makeText(requireContext(), "Tapped on icon", Toast.LENGTH_SHORT).show()
-//                NavigationUI.onNavDestinationSelected(item, requireView(), findNavController())
+//                navController.navigate(R.id.deleteShipFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
     private fun shipRecyclerView() {
         getShips()
