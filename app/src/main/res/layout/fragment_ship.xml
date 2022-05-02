@@ -7,52 +7,6 @@
     android:layout_marginHorizontal="0dp"
     tools:context=".fragments.ships.ShipFragment">
 
-    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/icontoolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-        <!--            android:layout_width="match_parent"-->
-        <!--            android:layout_height="wrap_content">-->
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:text="Barcos"
-        />
-
-            <ImageView
-                android:id="@+id/delete"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_delete" />
-
-            <ImageView
-                android:id="@+id/export"
-                android:layout_width="25sp"
-                android:layout_height="25sp"
-                android:layout_marginEnd="48sp"
-                android:layout_alignEnd="@id/delete"
-                android:src="@drawable/ic_export" />
-        </RelativeLayout>
-
-
-        <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    </androidx.appcompat.widget.Toolbar>
 
 
     <TextView
@@ -63,7 +17,7 @@
         android:layout_marginHorizontal="16dp"
         android:text="@string/barcos"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/icontoolbar" />
+       />
 
 
     <EditText

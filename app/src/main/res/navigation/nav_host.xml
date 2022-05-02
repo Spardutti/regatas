@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.regatas.fragments.HomeFragment"
-        android:label="Regatas">
+        android:label="Regatas Ensenada">
         <action
             android:id="@+id/action_homeFragment_to_shipFragment"
             app:destination="@id/shipFragment" />

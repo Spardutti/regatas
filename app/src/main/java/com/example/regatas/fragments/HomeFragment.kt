@@ -21,6 +21,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         binding.btnShips.setOnClickListener(
@@ -33,14 +34,4 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
-//    }
-
-//    private fun makeCurrentFragment(fragment: Fragment) =
-//     childFragmentManager.beginTransaction().apply {
-//            replace(R.id.main_layout, fragment)
-//            addToBackStack(null)
-//            commit()
-//        }.add()
 }

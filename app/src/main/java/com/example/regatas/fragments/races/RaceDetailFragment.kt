@@ -3,16 +3,14 @@ package com.example.regatas.fragments.races
 import android.app.Dialog
 import android.os.Bundle
 import android.os.SystemClock
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.Button
 import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceShipListInterface
@@ -40,6 +38,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         savedInstanceState: Bundle?
     ): View? {
 
+        setHasOptionsMenu(true)
         binding = FragmentRaceDetailBinding.inflate(inflater, container, false)
         val startStopBtn = binding.imageStartStop
         timer = binding.chronoRaceTime
@@ -135,4 +134,27 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         }
         dialog.show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.race_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//        val navhostFragment =
+//            activity?.supportFragmentManager?.findFragmentById(R.id.nav_host) as NavHostFragment
+//        val navController = navhostFragment.navController
+//
+//        return when (item.itemId) {
+//            R.id.delete -> {
+//                navController.navigate(R.id.deleteShipFragment)
+//                true
+//            }
+//            R.id.export -> {
+////                navController.navigate(R.id.deleteShipFragment)
+//                true
+//            }
+//            else -> super.onOptionsItemSelected(item)
+//        }
+//    }
 }
