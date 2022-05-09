@@ -2,11 +2,11 @@ package com.example.regatas.adapters.raceshiplist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceShipListInterface
 import com.example.regatas.data.ShipData
+
 
 class RaceShipListAdapter(val shipList: MutableList<ShipData>) :
     RecyclerView.Adapter<RaceShipListViewHolder>() {
@@ -31,6 +31,15 @@ class RaceShipListAdapter(val shipList: MutableList<ShipData>) :
     }
 
     override fun getItemCount() = shipList.size
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
 
     fun setOnShipTime(raceShipListInterface: RaceShipListInterface) {
         raceShipList = raceShipListInterface

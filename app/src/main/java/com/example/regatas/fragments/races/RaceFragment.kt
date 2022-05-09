@@ -60,7 +60,7 @@ class RaceFragment : Fragment() {
         binding.recyclerRaces.adapter = RaceAdapter(raceList)
     }
 
-    fun getRaces() {
+    private fun getRaces() {
         val races = Prefs(requireContext()).getRacesFromStorage()
         races?.sortBy { race -> race.isFinished}
         races?.sortedWith(compareBy({ it.isFinished }, { it.name }))

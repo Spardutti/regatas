@@ -40,8 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
-        android:text="TERMINAR"
-        android:textColor="@color/red"
+        android:text="GUARDAR"
+        android:textColor="#32336C"
         android:layout_marginTop="39dp"
 
         app:layout_constraintEnd_toStartOf="@id/btnNo"
@@ -56,7 +56,7 @@
         android:backgroundTint="#fafafa"
         android:text="CANCELAR"
         android:layout_marginTop="39dp"
-        android:textColor="@color/black"
+        android:textColor="#32336C99"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/body" />

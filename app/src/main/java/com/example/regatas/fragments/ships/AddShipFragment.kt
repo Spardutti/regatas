@@ -1,12 +1,14 @@
 package com.example.regatas.fragments.ships
 
+import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentAddShipBinding
 import com.example.regatas.prefs.Prefs
@@ -24,32 +26,31 @@ class AddShipFragment : Fragment() {
         binding.btnAddShip.setOnClickListener {
             addShip()
         }
-
-
-
         getShips()
 
         binding.spinnerSerie.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                println(p0?.getItemAtPosition(p2).toString())
-                serie = p0?.selectedItem.toString()
+                if (p2 != 0) serie = p0?.selectedItem.toString()
+                hideKeyboard()
             }
-
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 null
             }
         }
-
         return binding.root
     }
 
+    fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
+    }
 
     private fun addShip() {
         val name = binding.editName.text.toString()
         val tcf = binding.editTCF.text.toString()
-        if (name.isEmpty() || tcf.isEmpty()) Toast.makeText(
+        if (name.isEmpty() || tcf.isEmpty() || serie.isEmpty()) Toast.makeText(
             requireContext(),
-            "Completa los camps",
+            "Completa los campos",
             Toast.LENGTH_SHORT
         ).show()
         else {

@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     tools:context=".fragments.ships.AddShipFragment">
 
 
     <EditText
         android:id="@+id/editName"
         style="@style/input_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="24dp"
         android:hint="Nombre"
         android:inputType="text"
         android:padding="16dp"
@@ -22,6 +25,9 @@
     <EditText
         android:id="@+id/editTCF"
         style="@style/input_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:hint="TCF"
         android:inputType="numberDecimal"
         android:padding="16dp"
@@ -31,11 +37,12 @@
 
     <RelativeLayout
         android:id="@+id/spinner_layout"
-        android:layout_width="328dp"
+        android:layout_width="match_parent"
         android:layout_height="54dp"
         android:layout_marginTop="35dp"
         android:background="@drawable/input_field"
         android:paddingHorizontal="16dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTCF">
@@ -45,18 +52,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:entries="@array/spinnerItems"
-            android:hint="Serie"
             android:importantForAutofill="no" />
+
     </RelativeLayout>
 
 
     <Button
         android:id="@+id/btnAddShip"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:layout_marginTop="35dp"
-        android:drawableLeft="@drawable/ic_add"
-        android:drawableTint="@color/white"
         android:text="Agregar Barco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

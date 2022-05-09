@@ -37,9 +37,10 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="center"
-        android:layout_marginEnd="47.5sp"
+        android:layout_marginEnd="16dp"
         android:layout_weight="1"
         android:src="@drawable/ic_deleteship"
+        app:tint="@color/background"
         app:layout_constraintBottom_toBottomOf="@id/image_shipImg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/image_shipImg" />

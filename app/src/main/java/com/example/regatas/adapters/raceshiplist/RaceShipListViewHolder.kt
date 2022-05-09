@@ -17,16 +17,12 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if (shipList.time != null) binding.textTime.text = "Tiempo: ${shipList.time}"
 
 
-        val pos = layoutPosition
 
         if (shipList.isFinished) {
             binding.imageFinish.setImageResource(R.drawable.ic_finish_race)
         } else {
             binding.imageFinish.setOnClickListener {
-                raceShipList.onShipStopped(pos)
-                binding.textTime.text = "Tiempo: ${shipList.time}"
-                shipList.isFinished = true
-                binding.imageFinish.setImageResource(R.drawable.ic_finish_race)
+                raceShipList.onShipStopped(absoluteAdapterPosition)
             }
         }
     }

@@ -10,7 +10,11 @@
         android:id="@+id/editName"
         style="@style/input_style"
         android:hint="Nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:importantForAutofill="no"
+        android:layout_marginTop="24dp"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,25 +22,27 @@
 
 
     <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
         android:id="@+id/editDate"
         style="@style/input_style"
         android:focusable="false"
         android:hint="Fecha"
         android:inputType="date"
-
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editName" />
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddRace"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="43dp"
-        android:drawableLeft="@drawable/ic_add"
-        android:drawableTint="@color/white"
+        android:backgroundTint="@color/lightpurple"
+        android:layout_marginHorizontal="16dp"
         android:text="Agregar carrera"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,7 @@ package com.example.regatas.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.regatas.constants.Constants
 import com.example.regatas.data.ShipData
 import com.example.regatas.adapters.races.RaceData
@@ -30,6 +31,22 @@ class Prefs(val context: Context) {
         return null
     }
 
+    fun updateShip(ship: ShipData, shipName: String) {
+        val gson = Gson()
+        val json = storage.getString(Constants.SHIP_LIST, null)
+        val type = object : TypeToken<MutableList<ShipData>>() {}.type
+        val info: MutableList<ShipData> = gson.fromJson(json, type)
+        val iterator = info.iterator()
+        while (iterator.hasNext()) {
+            val item = iterator.next()
+            if (item.name == shipName) {
+                iterator.remove()
+            }
+        }
+        info.add(ship)
+        saveShip(info)
+    }
+
     fun saveRace(raceList: MutableList<RaceData>) {
         val gson = Gson()
         val json = gson.toJson(raceList)
@@ -50,9 +67,9 @@ class Prefs(val context: Context) {
         val type = object : TypeToken<MutableList<RaceData>>() {}.type
         val info: MutableList<RaceData> = gson.fromJson(json, type)
         val iterator = info.iterator()
-        while(iterator.hasNext()){
+        while (iterator.hasNext()) {
             val item = iterator.next()
-            if(item.name == raceName) {
+            if (item.name == raceName) {
                 iterator.remove()
             }
         }

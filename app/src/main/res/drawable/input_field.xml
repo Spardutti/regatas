@@ -4,6 +4,6 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     android:viewportWidth="327"
     android:viewportHeight="54">
-    <solid android:color="#14212121" />
+    <solid android:color="#21212114" />
     <corners android:radius="5dp" />
 </shape>

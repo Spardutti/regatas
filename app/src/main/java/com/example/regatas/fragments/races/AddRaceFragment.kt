@@ -1,9 +1,11 @@
 package com.example.regatas.fragments.races
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.regatas.databinding.FragmentAddRaceBinding
@@ -28,6 +30,7 @@ class AddRaceFragment : Fragment() {
         binding.editDate.setOnClickListener { showDatePicker() }
 
         binding.btnAddRace.setOnClickListener { createRace() }
+
 
         return binding.root
     }
@@ -63,7 +66,7 @@ class AddRaceFragment : Fragment() {
 
             if (currentRaces != null) raceList = currentRaces
 
-            if (ships != null) {
+            if (ships != null && ships.size > 0) {
                 val race = RaceData(name, date, null, ships)
                 raceList.add(race)
                 Prefs(requireContext()).saveRace(raceList)
@@ -71,8 +74,6 @@ class AddRaceFragment : Fragment() {
                 binding.editName.setText("")
                 binding.editDate.setText("")
             } else {
-//                val race = RaceData(name, date, null, null)
-//                raceList.add(race)
                 Toast.makeText(
                     requireContext(),
                     "No hay barcos para esta carrera",
@@ -80,5 +81,10 @@ class AddRaceFragment : Fragment() {
                 ).show()
             }
         }
+    }
+
+    fun hideKeyboard() {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

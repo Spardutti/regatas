@@ -29,13 +29,13 @@ class DeleteShipAdapter(val shipList: MutableList<ShipData>) :
         shipList.clear()
         Prefs(context).saveShip(shipList)
         notifyDataSetChanged()
-
     }
 
     override fun removeSingleShip(ship: ShipData, pos: Int, context: Context) {
         shipList.removeAt(pos)
         Prefs(context).saveShip((shipList))
         notifyItemRemoved(pos)
+        notifyItemRangeChanged(pos, shipList.size)
     }
 }
 
