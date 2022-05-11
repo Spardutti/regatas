@@ -17,6 +17,7 @@ import android.widget.Button
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -27,6 +28,7 @@ import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentAddShipBinding
 import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
+import com.github.dhaval2404.imagepicker.ImagePicker
 
 
 class AddShipFragment : Fragment() {
@@ -35,6 +37,8 @@ class AddShipFragment : Fragment() {
     var shipList = mutableListOf<ShipData>()
     lateinit var serie: String
     private var imageUri: Uri? = null
+
+    private lateinit var imagePicker: ImagePicker.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,113 +62,36 @@ class AddShipFragment : Fragment() {
             }
         }
 
-        binding.imageAvatar.setOnClickListener { openPickerDialog() }
+        binding.imageAvatar.setOnClickListener { Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForProfileImageResult) }
 
-        binding.editPen.setOnClickListener { openPickerDialog() }
+        binding.editPen.setOnClickListener { Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForProfileImageResult) }
+
+        // imagePicker configuration
+        imagePicker =
+            ImagePicker.Companion.with(requireParentFragment()).compress(1024).crop()
+                .galleryMimeTypes(  //Exclude gif images
+                    mimeTypes = arrayOf(
+                        "image/png",
+                        "image/jpg",
+                        "image/jpeg"
+                    )
+                )
 
         return binding.root
     }
 
+    /* start activity to choose a profile photo */
+    private val startForProfileImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val resultCode = result.resultCode
+            val data = result.data
 
-    /* pick image from gallery */
-    private val chooseFromGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { success ->
-        if (success.resultCode == RESULT_OK) {
-            val selectedImg: Uri? = success?.data?.data
-            binding.imageAvatar.setImageURI(selectedImg)
-            imageUri = selectedImg
-            requireContext().contentResolver.takePersistableUriPermission(
-                selectedImg!!,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-        } else {
-            Toast.makeText(requireContext(), "Por favor selecciona otra foto", Toast.LENGTH_LONG)
-                .show()
-        }
-    }
-
-    fun pickImage() {
-        val pickPhoto = Intent(
-            Intent.ACTION_OPEN_DOCUMENT,
-        )
-        pickPhoto.type = "image/*"
-        chooseFromGallery.launch(pickPhoto)
-    }
-    /* -------- end of pick from gallery  */
-
-    /* opens camera */
-    private val openCamera =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) { success ->
-            if (success) {
-                binding.imageAvatar.setImageURI(imageUri)
-            } else {
-                Toast.makeText(requireContext(), "Ocurrio un error", Toast.LENGTH_SHORT).show()
+            if (resultCode == RESULT_OK) {
+                val fileUri = data?.data!!
+                imageUri = fileUri
+                binding.imageAvatar.setImageURI(fileUri)
             }
         }
-
-    private fun cameraPermission() {
-        val cameraPermission =
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-        val writePermission = ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-        if (cameraPermission == -1) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.CAMERA),
-                100
-            )
-        } else if (writePermission == -1) {
-            ActivityCompat.requestPermissions(
-                requireActivity(),
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                100
-            )
-        } else {
-            takePicture.run()
-        }
-    }
-    /* ------ end of camera */
-
-    /* creates file/img to be stored in device */
-    private val takePicture: Runnable = Runnable {
-        Utils.ImageUtils.createImageFile(requireContext())?.also {
-            imageUri = FileProvider.getUriForFile(
-                requireContext(),
-                BuildConfig.APPLICATION_ID + ".fileprovider",
-                it
-            )
-            openCamera.launch(imageUri)
-        }
-    }
-
-    /* dialogs to choose between gallery and camera */
-    fun openPickerDialog() {
-        val dialog = Dialog(requireContext())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(R.layout.dialog_picker)
-        dialog.window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        val cameraBtn: Button = dialog.findViewById(R.id.camera)
-        val galleryBtn: Button = dialog.findViewById(R.id.gallery)
-
-        galleryBtn.setOnClickListener {
-            pickImage()
-            dialog.dismiss()
-        }
-
-        cameraBtn.setOnClickListener {
-            cameraPermission()
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
 
     /* creates a new ship entry */
     private fun addShip() {
@@ -177,7 +104,6 @@ class AddShipFragment : Fragment() {
         ).show()
         else {
             val ship = ShipData(tcf.toDouble(), name, serie, null, false, imageUri.toString())
-            println(ship)
             shipList.add(ship)
             Prefs(requireContext()).saveShip(shipList)
             Toast.makeText(requireContext(), "Barco añadido", Toast.LENGTH_SHORT).show()
@@ -194,6 +120,8 @@ class AddShipFragment : Fragment() {
     private fun resetEdits() {
         binding.editName.setText("")
         binding.editTCF.setText("")
+        binding.imageAvatar.setImageURI(null)
+        binding.imageAvatar.setBackgroundResource(R.drawable.upload_img)
     }
 
     fun hideKeyboard() {

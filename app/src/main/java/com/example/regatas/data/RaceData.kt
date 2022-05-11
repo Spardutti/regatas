@@ -11,5 +11,6 @@ data class RaceData(
     val date: String,
     var time: String?,
     val shipsList: @RawValue MutableList<ShipData>?,
-    var isFinished: Boolean = false
-): Parcelable
+    var isFinished: Boolean = false,
+    var image: String?
+) : Parcelable
