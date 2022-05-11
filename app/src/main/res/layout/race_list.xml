@@ -74,11 +74,11 @@
 
     <ImageView
         android:id="@+id/edit_raceName"
-        android:layout_width="20sp"
-        android:layout_height="20sp"
+        android:layout_width="24sp"
+        android:layout_height="24sp"
         android:layout_gravity="center"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_edit_pen"
         app:layout_constraintBottom_toBottomOf="@id/race_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -40,7 +40,6 @@ class RaceShipListAdapter(val shipList: MutableList<ShipData>) :
         return position
     }
 
-
     fun setOnShipTime(raceShipListInterface: RaceShipListInterface) {
         raceShipList = raceShipListInterface
     }

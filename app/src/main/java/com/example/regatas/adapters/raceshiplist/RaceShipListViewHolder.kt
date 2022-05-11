@@ -16,8 +16,6 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.textShipName.text = shipList.name
         if (shipList.time != null) binding.textTime.text = "Tiempo: ${shipList.time}"
 
-
-
         if (shipList.isFinished) {
             binding.imageFinish.setImageResource(R.drawable.ic_finish_race)
         } else {

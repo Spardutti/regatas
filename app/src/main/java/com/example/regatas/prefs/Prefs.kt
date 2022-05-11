@@ -2,10 +2,9 @@ package com.example.regatas.prefs
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.regatas.constants.Constants
 import com.example.regatas.data.ShipData
-import com.example.regatas.adapters.races.RaceData
+import com.example.regatas.data.RaceData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

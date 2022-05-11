@@ -1,8 +1,7 @@
 package com.example.regatas.`interface`
 
 import android.content.Context
-import android.os.Parcelable
-import com.example.regatas.adapters.races.RaceData
+import com.example.regatas.data.RaceData
 
 interface RaceInterface {
     fun getRaceInfo(raceList: RaceData): RaceData

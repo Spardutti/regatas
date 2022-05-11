@@ -3,19 +3,17 @@ package com.example.regatas.fragments.races
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
+import com.example.regatas.adapters.races.RaceAdapter
+import com.example.regatas.data.RaceData
 import com.example.regatas.databinding.FragmentRaceBinding
 import com.example.regatas.prefs.Prefs
-import com.example.regatas.adapters.races.RaceAdapter
-import com.example.regatas.adapters.races.RaceData
-import com.example.regatas.adapters.ships.ShipAdapter
-import com.example.regatas.data.ShipData
 
 class RaceFragment : Fragment() {
 
@@ -24,14 +22,13 @@ class RaceFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentRaceBinding.inflate(inflater, container, false)
 
         binding.btnAddRace.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_raceFragment_to_addRaceFragment)
         )
-
 
         binding.autoCompleteTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

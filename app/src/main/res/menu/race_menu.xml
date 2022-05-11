@@ -8,8 +8,9 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/edit"
-        android:icon="@drawable/ic_editedit_white"
+        android:icon="@drawable/ic_edit_pen"
         android:title=""
+        android:tint="@color/white"
         app:showAsAction="ifRoom" />
 
 </menu>

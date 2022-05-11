@@ -35,17 +35,6 @@ import java.io.InputStreamReader
 
 class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted: Boolean ->
-        if (isGranted) {
-            importShips()
-        } else {
-            // Permission request was denied.
-            requestPermissions()
-        }
-    }
-
     private lateinit var binding: FragmentShipBinding
     private var shipList = mutableListOf<ShipData>()
 
@@ -56,6 +45,7 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         setHasOptionsMenu(true)
         binding = FragmentShipBinding.inflate(inflater, container, false)
 
+        /* editText filter overrides */
         binding.autoCompleteTextView.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
@@ -89,7 +79,19 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
 
         } else requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted: Boolean ->
+        if (isGranted) {
+            importShips()
+        } else {
+            // Permission request was denied.
+            requestPermissions()
+        }
+    }
+ /* ------------------- */
 
+    /* inflate toolbar with custom items */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.ship_menu, menu)
         return super.onCreateOptionsMenu(menu, inflater)
@@ -97,10 +99,11 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         val delete = menu.findItem(R.id.delete)
-        if(shipList.size == 0) delete.isVisible = false
+        if (shipList.size == 0) delete.isVisible = false
         super.onPrepareOptionsMenu(menu)
     }
 
+    /* top toolbar navigation */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val navhostFragment =
             activity?.supportFragmentManager?.findFragmentById(R.id.nav_host) as NavHostFragment
@@ -124,6 +127,7 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         binding.recyclerShip.adapter = ShipAdapter(shipList)
     }
 
+    /* get ships from local storage */
     private fun getShips() {
         val ships = Prefs(requireContext()).getShipsFromStorage()
         ships?.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
@@ -131,6 +135,7 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         shipRecyclerView(shipList)
     }
 
+    /* filter shiplist by name*/
     private fun filterList(letter: CharSequence) {
         var originalList = shipList
         val newList = originalList.filter { ship -> ship.name.contains(letter, ignoreCase = true) }
@@ -138,41 +143,41 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         binding.recyclerShip.adapter = ShipAdapter(originalList)
     }
 
+    /* import ship from csv format: name,serie,tcf */
     fun importShips() {
         val intent = Intent()
             .setType("*/*")
             .setAction(Intent.ACTION_GET_CONTENT)
-        startActivityForResult(Intent.createChooser(intent, "Select a file"), 200)
+        importShipsLauncher.launch(intent)
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 200) { // Step 1: When a result has been received, check if it is the result for READ_IN_FILE
-            if (resultCode == RESULT_OK) { // Step 2: Check if the operation to retrieve the activity's result is successful
-                // Attempt to retrieve the file
+    val importShipsLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { sucess ->
+            if (sucess.resultCode == RESULT_OK) {
                 try {
-                    data?.data?.let {
+                    sucess?.data?.data?.let {
                         context?.contentResolver?.openInputStream(it)
-
                     }?.let {
                         val r = BufferedReader(InputStreamReader(it))
                         while (true) {
-
                             val line: String? = r.readLine() ?: break
                             val split = line?.split(",")
                             val name = split?.get(0)
                             val serie = split?.get(1)
-
                             if (split?.get(2)?.toDoubleOrNull() != null) {
                                 val tcf = split?.get(2)?.toDoubleOrNull()
-                                val ship = ShipData(tcf!!, name!!, serie!!, null)
+                                val ship = ShipData(tcf!!, name!!, serie!!, null, false, null)
                                 shipList.add(ship)
                             }
                         }
                         Prefs(requireContext()).saveShip(shipList)
                         shipRecyclerView(shipList)
                         activity?.invalidateOptionsMenu()
-                        Toast.makeText(requireContext(), "Barcos importados con exito", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Barcos importados con exito",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 } catch (e: Exception) { // If the app failed to attempt to retrieve the error file, throw an error alert
                     Toast.makeText(
@@ -183,5 +188,4 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
                 }
             }
         }
-    }
 }

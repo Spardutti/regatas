@@ -1,16 +1,14 @@
 package com.example.regatas.fragments.races
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.regatas.data.RaceData
 import com.example.regatas.databinding.FragmentAddRaceBinding
 import com.example.regatas.prefs.Prefs
-import com.example.regatas.adapters.races.RaceData
 import com.example.tasker.fragments.DatePickerFragment
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,7 +16,7 @@ import java.util.*
 //
 class AddRaceFragment : Fragment() {
     private lateinit var binding: FragmentAddRaceBinding
-    lateinit var dateTime: Date
+    private lateinit var dateTime: Date
     private var raceList = mutableListOf<RaceData>()
 
     override fun onCreateView(
@@ -31,10 +29,8 @@ class AddRaceFragment : Fragment() {
 
         binding.btnAddRace.setOnClickListener { createRace() }
 
-
         return binding.root
     }
-
 
     private fun showDatePicker() {
         val datePicker = DatePickerFragment { day, month, year -> onSelectedDate(day, month, year) }
@@ -54,10 +50,9 @@ class AddRaceFragment : Fragment() {
     }
 
     private fun createRace() {
-        var name = binding.editName.text.toString()
-        var date = binding.editDate.text.toString()
+        val name = binding.editName.text.toString()
+        val date = binding.editDate.text.toString()
         if (name.isEmpty() || date.isEmpty()) {
-
             Toast.makeText(requireContext(), "Por favor completa los campos", Toast.LENGTH_LONG)
                 .show()
         } else {
@@ -81,10 +76,5 @@ class AddRaceFragment : Fragment() {
                 ).show()
             }
         }
-    }
-
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

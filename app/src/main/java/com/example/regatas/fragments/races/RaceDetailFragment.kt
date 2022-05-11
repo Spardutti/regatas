@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceShipListInterface
-import com.example.regatas.adapters.races.RaceData
+import com.example.regatas.data.RaceData
 import com.example.regatas.adapters.raceshiplist.RaceShipListAdapter
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentRaceDetailBinding
@@ -49,7 +49,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
 
         startStopBtn.setOnClickListener { chronoController() }
 
-
+        /* gets data from previous fragment */
         getArgs()
 
         initRecyclerView()
@@ -72,7 +72,9 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
             }
         })
 
+        /* format to 00:00:00*/
         chronoMeterFormat()
+
         /* Toolbar title */
         (requireActivity() as AppCompatActivity).supportActionBar?.title = raceInfo.name
 
@@ -95,7 +97,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         timer.text = ("00:00:00")
     }
 
-    /* Get the args from the click race on the previous fragment */
+    /* Get the args from the clicked race on the previous fragment */
     fun getArgs() {
         val args = this.arguments?.getString("raceInfo")
         val type = object : TypeToken<RaceData>() {}.type
@@ -110,7 +112,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         shipList = ships!!
     }
 
-    /* start stop controller */
+    /* start stop chrono timer */
     fun chronoController() {
         if (!isActive) startTimer()
         else finishRaceDialog(timer.text.toString())
@@ -199,7 +201,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         centerTimer()
         for (ship in shipList) {
             if (ship.isFinished == false) {
-                ship.time = time
+                ship.time = "N/A"
                 ship.isFinished = true
             }
         }
@@ -210,7 +212,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     }
 
 
-    /* Center element when button is gone*/
+    /* Center time when start/stop is gone*/
     fun centerTimer() {
         val constraintLayout = binding.parent
         val constraintSet = ConstraintSet()
@@ -263,6 +265,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         dialog.show()
     }
 
+    /* checks whether race is finished or not to display export icon */
     override fun onPrepareOptionsMenu(menu: Menu) {
         val export = menu.findItem(R.id.export)
         export.isVisible = raceInfo.isFinished
@@ -303,6 +306,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         binding.recyclerRaceShipList.adapter = adapter
     }
 
+    /* creates and export a csv file */
     private fun csvOf(
         headers: String,
         data: List<ShipData>,
@@ -319,17 +323,18 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         }
     }
 
+    /* creates csv file and save it to download folders.*/
     private fun saveData() {
         val headers = "Nombre, Tiempo"
         val csv = csvOf(headers, raceInfo.shipsList!!) {
             listOf(it.name, it.time!!)
         }
         var root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
-        //if you want to create a sub-dir
+//        if you want to create a sub -dir
 //        root = File(root, "SubDir");
 //        root.mkdir();
 
-        // select the name for your file
+//        select the name for your file
         root = File(root, "${raceInfo.name}.csv");
 
         try {

@@ -6,6 +6,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.*
 import com.example.regatas.`interface`.RaceInterface
+import com.example.regatas.data.RaceData
 import com.example.regatas.databinding.RaceListBinding
 import com.example.regatas.fragments.races.RaceDetailFragment
 import com.google.gson.Gson
@@ -20,7 +21,6 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.raceName.text = raceList.name
         binding.raceDate.text = raceList.date
         binding.raceTime.text = raceList.time
-        val pos = layoutPosition
 
         binding.editRaceName.setOnClickListener {
             raceInt.editRace(it.context, raceList.name, raceList)

@@ -2,16 +2,15 @@ package com.example.regatas.adapters.races
 
 import android.app.Dialog
 import android.content.Context
-import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceInterface
+import com.example.regatas.data.RaceData
 import com.example.regatas.prefs.Prefs
 
 class RaceAdapter(val raceList: MutableList<RaceData>) : RecyclerView.Adapter<RaceViewHolder>(),
@@ -19,12 +18,10 @@ class RaceAdapter(val raceList: MutableList<RaceData>) : RecyclerView.Adapter<Ra
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-
         return RaceViewHolder(layoutInflater.inflate(R.layout.race_list, parent, false))
     }
 
     override fun onBindViewHolder(holder: RaceViewHolder, position: Int) {
-
         val item = raceList[position]
         holder.setOnRaceClicked(this)
         holder.render(item)
@@ -33,8 +30,11 @@ class RaceAdapter(val raceList: MutableList<RaceData>) : RecyclerView.Adapter<Ra
     override fun getItemCount() = raceList.size
 
     override fun getRaceInfo(raceList: RaceData): RaceData {
-
         return raceList
+    }
+
+    override fun getItemId(position: Int): Long {
+       return position.toLong()
     }
 
     override fun editRace(context: Context, raceName: String, raceList: RaceData) {

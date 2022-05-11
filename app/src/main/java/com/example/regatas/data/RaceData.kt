@@ -1,4 +1,4 @@
-package com.example.regatas.adapters.races
+package com.example.regatas.data
 
 import android.os.Parcelable
 import com.example.regatas.data.ShipData

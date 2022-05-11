@@ -8,10 +8,10 @@
     >
 
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_shipImg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:background="@drawable/ic_circle"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="19.5dp"
@@ -25,6 +25,7 @@
         android:textSize="16sp"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:fontFamily="@font/roboto_medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_shipImg"
         app:layout_constraintTop_toTopOf="parent"
@@ -34,7 +35,7 @@
         android:id="@+id/image_editShip"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_edit_pen"
         app:tint="@color/lightpurple"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
