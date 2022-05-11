@@ -55,7 +55,6 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         initRecyclerView()
 
         if (binding.imageStartStop.visibility == View.GONE) {
-            println("here")
             centerTimer()
         }
 
@@ -283,7 +282,6 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.edit -> {
-                println("clicked")
                 editRaceDialog(raceInfo.name)
                 true
             }

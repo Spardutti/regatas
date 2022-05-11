@@ -1,5 +1,6 @@
 package com.example.regatas.adapters.races
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.Navigation
@@ -25,6 +26,8 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         binding.editRaceName.setOnClickListener {
             raceInt.editRace(it.context, raceList.name, raceList)
         }
+
+        if (raceList.image != null) binding.imageCircle.setImageURI(Uri.parse(raceList.image))
 
         binding.raceItem.setOnClickListener {
             val race = raceInt.getRaceInfo(raceList)

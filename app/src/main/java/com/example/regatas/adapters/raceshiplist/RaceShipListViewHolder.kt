@@ -1,5 +1,6 @@
 package com.example.regatas.adapters.raceshiplist
 
+import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
@@ -22,6 +23,10 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             binding.imageFinish.setOnClickListener {
                 raceShipList.onShipStopped(absoluteAdapterPosition)
             }
+        }
+
+        if(shipList.avatar != null) {
+            binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
         }
     }
 

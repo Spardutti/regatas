@@ -1,5 +1,6 @@
 package com.example.regatas.adapters.ships
 
+import android.net.Uri
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.`interface`.RemoveShipInterface
@@ -16,6 +17,10 @@ class DeleteShipViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         binding.imageDeleteShip.setOnClickListener {
             removeShipInt.removeSingleShip(shipList, pos, it.context)
+        }
+
+        if (shipList.avatar != null) {
+            binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
         }
     }
 
