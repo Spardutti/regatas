@@ -38,7 +38,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         setHasOptionsMenu(true)
         binding = FragmentRaceDetailBinding.inflate(inflater, container, false)
@@ -329,41 +329,41 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         val csv = csvOf(headers, raceInfo.shipsList!!) {
             listOf(it.name, it.time!!)
         }
-        var root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
+        var root = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
 //        if you want to create a sub -dir
 //        root = File(root, "SubDir");
 //        root.mkdir();
 
 //        select the name for your file
-        root = File(root, "${raceInfo.name}.csv");
+        root = File(root, "${raceInfo.name}.csv")
 
         try {
-            val fout = FileOutputStream(root);
-            fout.write(csv.toByteArray());
+            val fout = FileOutputStream(root)
+            fout.write(csv.toByteArray())
             Toast.makeText(
                 requireContext(),
                 "Carrera exportada como ${raceInfo.name}",
                 Toast.LENGTH_SHORT
             ).show()
-            fout.close();
+            fout.close()
         } catch (e: FileNotFoundException) {
-            e.printStackTrace();
+            e.printStackTrace()
 //          if file not found create it and call the method again
-            var bool = false;
+            var bool = false
             try {
                 // try to create the file
                 bool = root.createNewFile()
             } catch (ex: IOException) {
-                ex.printStackTrace();
+                ex.printStackTrace()
             }
             if (bool) {
                 // call the method again
                 saveData()
             } else {
-                throw  IllegalStateException("Failed to create image file");
+                throw  IllegalStateException("Failed to create image file")
             }
         } catch (e: IOException) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 }
