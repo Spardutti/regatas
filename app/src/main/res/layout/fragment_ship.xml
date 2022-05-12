@@ -41,15 +41,14 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerShip"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintHeight_min="500dp"
-        android:layout_marginTop="56dp"
-        app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:paddingBottom="70dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="31dp"
         android:clipToPadding="false"
+        android:paddingBottom="170dp"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_min="500dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/autoCompleteTextView" />
 
 <!--    <ImageView-->

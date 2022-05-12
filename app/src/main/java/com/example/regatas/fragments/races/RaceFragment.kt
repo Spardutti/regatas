@@ -59,9 +59,11 @@ class RaceFragment : Fragment() {
 
     private fun getRaces() {
         val races = Prefs(requireContext()).getRacesFromStorage()
-        races?.sortBy { race -> race.isFinished}
-        races?.sortedWith(compareBy({ it.isFinished }, { it.name }))
-        if (races != null) raceList = races
+        if (races != null) {
+            races.sortWith(compareBy<RaceData, String>(String.CASE_INSENSITIVE_ORDER) { it.isFinished.toString() }.thenBy { it.date }
+                .thenBy { it.name })
+            raceList = races
+        }
     }
 
     private fun filterList(letter: CharSequence) {

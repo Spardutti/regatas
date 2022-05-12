@@ -148,8 +148,9 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
             shipList[pos].time = timer.text.toString()
             shipList[pos].isFinished = true
             shipsFinishedCount++
-            shipList.add(shipList.removeAt(pos))
             binding.recyclerRaceShipList.adapter?.notifyItemRemoved(pos)
+            binding.recyclerRaceShipList.adapter?.notifyItemRangeChanged(pos, shipList.size)
+            shipList.add(shipList.removeAt(pos))
             binding.recyclerRaceShipList.adapter?.notifyItemInserted(shipList.size - 1)
 
             if (shipsFinishedCount == shipList.size) {

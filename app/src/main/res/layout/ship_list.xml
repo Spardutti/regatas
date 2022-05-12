@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-  android:layout_marginBottom="50dp"
-    >
+    android:layout_marginBottom="32dp">
 
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/image_shipImg"
         android:layout_width="56dp"
         android:layout_height="56dp"
-        android:background="@drawable/upload_img"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
+        android:src="@drawable/ic_vectorship"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -22,10 +21,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
         android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image_shipImg"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,13 +34,12 @@
         android:id="@+id/image_editShip"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/ic_edit_pen"
-        app:tint="@color/lightpurple"
         android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_edit_pen"
+        app:layout_constraintBottom_toBottomOf="@id/text_shipName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/text_shipName"
-        app:layout_constraintBottom_toBottomOf="@id/text_shipName"
-        />
+        app:tint="@color/lightpurple" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

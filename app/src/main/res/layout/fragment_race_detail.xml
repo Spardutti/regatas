@@ -47,13 +47,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerRaceShipList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintHeight_min="500dp"
         android:layout_marginTop="43dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/edit_searchShip" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

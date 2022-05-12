@@ -15,7 +15,6 @@ import com.example.regatas.databinding.FragmentAddRaceBinding
 import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
 import com.example.tasker.fragments.DatePickerFragment
-import com.github.dhaval2404.imagepicker.ImagePicker
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,7 +23,6 @@ class AddRaceFragment : Fragment() {
     private lateinit var binding: FragmentAddRaceBinding
     private lateinit var dateTime: Date
     private var raceList = mutableListOf<RaceData>()
-    private lateinit var imagePicker: ImagePicker.Builder
     private var imageUri: Uri? = null
 
     override fun onCreateView(
@@ -37,23 +35,20 @@ class AddRaceFragment : Fragment() {
 
         binding.btnAddRace.setOnClickListener { createRace() }
 
-        // imagePicker configuration
-        imagePicker =
-            ImagePicker.Companion.with(requireParentFragment()).compress(1024).crop()
-                .galleryMimeTypes(  //Exclude gif images
-                    mimeTypes = arrayOf(
-                        "image/png",
-                        "image/jpg",
-                        "image/jpeg"
-                    )
-                )
-
         binding.imageAvatar.setOnClickListener {
-            Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForImageResult)
+            Utils.Dialog.openPickerDialog(
+                requireContext(),
+                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                startForImageResult
+            )
         }
 
         binding.editPen.setOnClickListener {
-            Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForImageResult)
+            Utils.Dialog.openPickerDialog(
+                requireContext(),
+                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                startForImageResult
+            )
         }
 
         return binding.root
@@ -98,9 +93,8 @@ class AddRaceFragment : Fragment() {
         } else {
             val ships = Prefs(requireContext()).getShipsFromStorage()
             val currentRaces = Prefs(requireContext()).getRacesFromStorage()
-
             if (currentRaces != null) raceList = currentRaces
-
+            println(imageUri.toString())
             if (ships != null && ships.size > 0) {
                 val race = RaceData(name, date, null, ships, false, imageUri.toString())
                 raceList.add(race)

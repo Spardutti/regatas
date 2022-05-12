@@ -30,6 +30,9 @@ class DeleteShipFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentDeleteShipBinding.inflate(inflater, container, false)
+
+        getShips()
+
         recyclerView()
 
         binding.btnDeleteAll.setOnClickListener {
@@ -39,7 +42,6 @@ class DeleteShipFragment : Fragment() {
     }
 
     private fun recyclerView() {
-        getShips()
         binding.recyclerDeleteShip.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerDeleteShip.adapter = DeleteShipAdapter(shipList)
     }

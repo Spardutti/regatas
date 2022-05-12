@@ -25,7 +25,7 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             }
         }
 
-        if(shipList.avatar != null) {
+        if(shipList.avatar != "null") {
             binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
         }
     }

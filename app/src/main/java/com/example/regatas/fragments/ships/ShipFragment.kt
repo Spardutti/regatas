@@ -43,6 +43,7 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         savedInstanceState: Bundle?
     ): View? {
         setHasOptionsMenu(true)
+
         binding = FragmentShipBinding.inflate(inflater, container, false)
 
         /* editText filter overrides */
@@ -63,6 +64,8 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         )
 
         getShips()
+
+        shipRecyclerView(shipList)
 
         return binding.root
     }
@@ -132,7 +135,6 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
         val ships = Prefs(requireContext()).getShipsFromStorage()
         ships?.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
         if (ships != null) shipList = ships
-        shipRecyclerView(shipList)
     }
 
     /* filter shiplist by name*/

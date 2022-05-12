@@ -1,34 +1,20 @@
 package com.example.regatas.fragments.ships
 
-import android.Manifest
 import android.app.Activity.RESULT_OK
-import android.app.Dialog
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import android.view.inputmethod.InputMethodManager
 import android.widget.AdapterView
-import android.widget.Button
-import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
-import com.example.regatas.BuildConfig
 import com.example.regatas.R
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentAddShipBinding
 import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
-import com.github.dhaval2404.imagepicker.ImagePicker
 
 
 class AddShipFragment : Fragment() {
@@ -37,8 +23,6 @@ class AddShipFragment : Fragment() {
     var shipList = mutableListOf<ShipData>()
     lateinit var serie: String
     private var imageUri: Uri? = null
-
-    private lateinit var imagePicker: ImagePicker.Builder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,30 +36,31 @@ class AddShipFragment : Fragment() {
             addShip()
         }
 
+
         binding.spinnerSerie.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
                 if (p2 != 0) serie = p0?.selectedItem.toString()
-                hideKeyboard()
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
 
-        binding.imageAvatar.setOnClickListener { Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForProfileImageResult) }
+        binding.imageAvatar.setOnClickListener {
+            Utils.Dialog.openPickerDialog(
+                requireContext(),
+                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                startForProfileImageResult
+            )
+        }
 
-        binding.editPen.setOnClickListener { Utils.Dialog.openPickerDialog(requireContext(), imagePicker, startForProfileImageResult) }
-
-        // imagePicker configuration
-        imagePicker =
-            ImagePicker.Companion.with(requireParentFragment()).compress(1024).crop()
-                .galleryMimeTypes(  //Exclude gif images
-                    mimeTypes = arrayOf(
-                        "image/png",
-                        "image/jpg",
-                        "image/jpeg"
-                    )
-                )
+        binding.editPen.setOnClickListener {
+            Utils.Dialog.openPickerDialog(
+                requireContext(),
+                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                startForProfileImageResult
+            )
+        }
 
         return binding.root
     }
@@ -122,10 +107,5 @@ class AddShipFragment : Fragment() {
         binding.editTCF.setText("")
         binding.imageAvatar.setImageURI(null)
         binding.imageAvatar.setBackgroundResource(R.drawable.upload_img)
-    }
-
-    fun hideKeyboard() {
-        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(view?.windowToken, 0)
     }
 }

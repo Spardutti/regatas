@@ -37,5 +37,9 @@ class DeleteShipAdapter(val shipList: MutableList<ShipData>) :
         notifyItemRemoved(pos)
         notifyItemRangeChanged(pos, shipList.size)
     }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
 }
 
