@@ -63,7 +63,8 @@
         tools:layout="@layout/fragment_delete_ship" >
         <action
             android:id="@+id/action_deleteShipFragment_to_shipFragment"
-            app:destination="@id/shipFragment" />
+            app:destination="@id/shipFragment"
+            app:popUpTo="@id/shipFragment" />
     </fragment>
     <fragment
         android:id="@+id/raceFragment"
@@ -87,6 +88,13 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_raceFragment_to_editRaceFragment"
+            app:destination="@id/editRaceFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/addRaceFragment"
@@ -95,7 +103,11 @@
         tools:layout="@layout/fragment_add_race" >
         <action
             android:id="@+id/action_addRaceFragment_to_raceFragment"
-            app:destination="@id/raceFragment" />
+            app:destination="@id/raceFragment"
+            app:popUpTo="@id/raceFragment" />
+        <action
+            android:id="@+id/action_addRaceFragment_to_addShipToRaceFragment"
+            app:destination="@id/addShipToRaceFragment" />
     </fragment>
     <fragment
         android:id="@+id/raceDetailFragment"
@@ -104,6 +116,47 @@
         tools:layout="@layout/fragment_race_detail" >
         <action
             android:id="@+id/action_raceDetailFragment_to_raceFragment"
-            app:destination="@id/raceFragment" />
+            app:destination="@id/raceFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left"
+            app:popUpTo="@id/raceFragment" />
+        <action
+            android:id="@+id/action_raceDetailFragment_to_editRaceFragment"
+            app:destination="@id/editRaceFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/editRaceFragment"
+        android:name="com.example.regatas.fragments.races.EditRaceFragment"
+        android:label="fragment_edit_race"
+        tools:layout="@layout/fragment_edit_race" >
+        <action
+            android:id="@+id/action_editRaceFragment_to_addShipToRaceFragment"
+            app:destination="@id/addShipToRaceFragment" />
+        <action
+            android:id="@+id/action_editRaceFragment_to_raceFragment"
+            app:destination="@id/raceFragment"
+            app:popUpTo="@id/raceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addShipToRaceFragment"
+        android:name="com.example.regatas.fragments.races.AddShipToRaceFragment"
+        android:label="fragment_add_ship_to_race"
+        tools:layout="@layout/fragment_add_ship_to_race" >
+        <action
+            android:id="@+id/action_addShipToRaceFragment_to_editRaceFragment"
+            app:destination="@id/editRaceFragment" />
+        <action
+            android:id="@+id/action_addShipToRaceFragment_to_addRaceFragment"
+            app:destination="@id/addRaceFragment" />
+        <action
+            android:id="@+id/action_addShipToRaceFragment_to_raceFragment"
+            app:destination="@id/raceFragment"
+            app:popUpTo="@id/raceFragment" />
     </fragment>
 </navigation>

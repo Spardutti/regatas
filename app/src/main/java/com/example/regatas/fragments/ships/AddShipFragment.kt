@@ -47,7 +47,7 @@ class AddShipFragment : Fragment() {
         }
 
         binding.imageAvatar.setOnClickListener {
-            Utils.Dialog.openPickerDialog(
+            Utils.Dialog.cameraGalleryDialog(
                 requireContext(),
                 Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
                 startForProfileImageResult
@@ -55,7 +55,7 @@ class AddShipFragment : Fragment() {
         }
 
         binding.editPen.setOnClickListener {
-            Utils.Dialog.openPickerDialog(
+            Utils.Dialog.cameraGalleryDialog(
                 requireContext(),
                 Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
                 startForProfileImageResult
@@ -88,7 +88,7 @@ class AddShipFragment : Fragment() {
             Toast.LENGTH_SHORT
         ).show()
         else {
-            val ship = ShipData(tcf.toDouble(), name, serie, null, false, imageUri.toString())
+            val ship = ShipData(tcf.toDouble(), name, serie, null, false, imageUri.toString(), false)
             shipList.add(ship)
             Prefs(requireContext()).saveShip(shipList)
             Toast.makeText(requireContext(), "Barco añadido", Toast.LENGTH_SHORT).show()

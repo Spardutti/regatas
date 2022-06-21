@@ -7,49 +7,28 @@
     tools:context=".fragments.races.AddRaceFragment">
 
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/image_avatar"
-        android:layout_width="189dp"
-        android:layout_height="189dp"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/upload_img"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/editPen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="111dp"
-        android:contentDescription="edit pen"
-        android:src="@drawable/ic_edit_pen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white" />
 
     <EditText
         android:id="@+id/editName"
         style="@style/input_style"
-        android:hint="Nombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:importantForAutofill="no"
         android:layout_marginTop="24dp"
+        android:hint="Nombre"
+        android:importantForAutofill="no"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/image_avatar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <EditText
+        android:id="@+id/editDate"
+        style="@style/input_style"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:id="@+id/editDate"
-        style="@style/input_style"
         android:focusable="false"
         android:hint="Fecha"
         android:inputType="date"
@@ -60,15 +39,13 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnAddRace"
+        android:id="@+id/btnAddShips"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:backgroundTint="@color/lightpurple"
+        android:layout_marginTop="24dp"
         android:layout_marginHorizontal="16dp"
-        android:text="Agregar carrera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editDate" />
+        app:layout_constraintTop_toBottomOf="@id/editDate"
+        android:text="Agregar barcos"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

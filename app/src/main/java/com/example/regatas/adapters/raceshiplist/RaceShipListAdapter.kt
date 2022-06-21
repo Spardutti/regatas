@@ -17,7 +17,7 @@ class RaceShipListAdapter(val shipList: MutableList<ShipData>) :
 
         return RaceShipListViewHolder(
             layoutInflater.inflate(
-                R.layout.race_ship_list,
+                R.layout.list_race_ship,
                 parent,
                 false
             )

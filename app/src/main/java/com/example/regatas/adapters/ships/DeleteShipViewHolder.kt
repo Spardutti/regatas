@@ -5,10 +5,10 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.`interface`.RemoveShipInterface
 import com.example.regatas.data.ShipData
-import com.example.regatas.databinding.DeleteshipListBinding
+import com.example.regatas.databinding.ListDeleteshipBinding
 
 class DeleteShipViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val binding = DeleteshipListBinding.bind(view)
+    private val binding = ListDeleteshipBinding.bind(view)
     private lateinit var removeShipInt: RemoveShipInterface
 
     fun render(shipList: ShipData) {

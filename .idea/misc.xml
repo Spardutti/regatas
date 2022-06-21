@@ -15,14 +15,22 @@
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/drawable/shadow_drawable.xml" value="0.1545" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/activity_main.xml" value="0.18958333333333333" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/deleteship_list.xml" value="0.12" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/dialog_edit_ship.xml" value="0.2817028985507246" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/dialog_import_ships.xml" value="0.2817028985507246" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/dialog_picker.xml" value="0.33" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_add_race.xml" value="0.28940217391304346" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_add_ship.xml" value="0.5896860986547086" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_add_ship_to_race.xml" value="0.33" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_delete_ship.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_edit_race.xml" value="0.5" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_home.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_race.xml" value="0.18802083333333333" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_race.xml" value="0.365036231884058" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_race_detail.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/fragment_ship.xml" value="0.28940217391304346" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/list_addship.xml" value="0.365625" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/list_race.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/list_ship.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/list_simple_ship.xml" value="0.209375" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/pick_image_dialog.xml" value="0.3582427536231884" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/race_list.xml" value="0.9" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/race_ship_list.xml" value="0.36666666666666664" />
