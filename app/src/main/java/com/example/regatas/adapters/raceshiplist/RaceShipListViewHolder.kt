@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceShipListInterface
 import com.example.regatas.data.ShipData
-import com.example.regatas.databinding.RaceShipListBinding
+import com.example.regatas.databinding.ListRaceShipBinding
 
 class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    private val binding = RaceShipListBinding.bind(view)
+    private val binding = ListRaceShipBinding.bind(view)
 
     lateinit var raceShipList: RaceShipListInterface
 

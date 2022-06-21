@@ -4,6 +4,8 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Activity.RESULT_OK
+import android.app.Dialog
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -14,7 +16,11 @@ import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -27,6 +33,7 @@ import com.example.regatas.adapters.ships.ShipAdapter
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentShipBinding
 import com.example.regatas.prefs.Prefs
+import com.github.dhaval2404.imagepicker.ImagePicker
 import java.io.BufferedReader
 import java.io.File
 import java.io.IOException
@@ -78,21 +85,46 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
             )
             == PackageManager.PERMISSION_GRANTED
         ) {
-            importShips()
+            importShipsDialog()
 
         } else requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
     }
+
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            importShips()
+            importShipsDialog()
         } else {
             // Permission request was denied.
             requestPermissions()
         }
     }
- /* ------------------- */
+    /* ------------------- */
+
+    fun importShipsDialog(
+    ) {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_import_ships)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+
+        val importBtn: Button = dialog.findViewById(R.id.btnImport)
+        val filePicker: TextView = dialog.findViewById(R.id.editFile)
+
+        filePicker.setOnClickListener {
+            importShips()
+        }
+
+        importBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
 
     /* inflate toolbar with custom items */
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -154,10 +186,10 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
     }
 
     val importShipsLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { sucess ->
-            if (sucess.resultCode == RESULT_OK) {
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { success ->
+            if (success.resultCode == RESULT_OK) {
                 try {
-                    sucess?.data?.data?.let {
+                    success?.data?.data?.let {
                         context?.contentResolver?.openInputStream(it)
                     }?.let {
                         val r = BufferedReader(InputStreamReader(it))

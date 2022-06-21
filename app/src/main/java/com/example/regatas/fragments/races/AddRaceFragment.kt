@@ -8,22 +8,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
+import com.example.regatas.`interface`.RaceAddShipInterface
+import com.example.regatas.adapters.races.RaceAddShipAdapter
 import com.example.regatas.data.RaceData
+import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentAddRaceBinding
 import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
 import com.example.tasker.fragments.DatePickerFragment
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
 import java.util.*
 
 //
 class AddRaceFragment : Fragment() {
     private lateinit var binding: FragmentAddRaceBinding
-    private lateinit var dateTime: Date
     private var raceList = mutableListOf<RaceData>()
-    private var imageUri: Uri? = null
+    private var selectedShipList: MutableList<ShipData>? = mutableListOf()
+    var raceInfo: RaceData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,41 +40,41 @@ class AddRaceFragment : Fragment() {
     ): View {
         binding = FragmentAddRaceBinding.inflate(inflater, container, false)
 
-        binding.editDate.setOnClickListener { showDatePicker() }
-
-        binding.btnAddRace.setOnClickListener { createRace() }
-
-        binding.imageAvatar.setOnClickListener {
-            Utils.Dialog.openPickerDialog(
-                requireContext(),
-                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
-                startForImageResult
-            )
+        binding.editDate.setOnClickListener {
+            showDatePicker()
         }
 
-        binding.editPen.setOnClickListener {
-            Utils.Dialog.openPickerDialog(
-                requireContext(),
-                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
-                startForImageResult
-            )
+
+
+        binding.btnAddShips.setOnClickListener {
+            if (binding.editName.text.isNotEmpty() && binding.editDate.text.isNotEmpty()) {
+                parseRaceInfoAndNavigate(
+                    R.id.action_addRaceFragment_to_addShipToRaceFragment,
+                    it
+                )
+                (requireActivity() as AppCompatActivity).supportActionBar?.title =
+                    binding.editName.text.toString()
+            }
         }
 
         return binding.root
     }
 
-    /* start activity to choose a race photo */
-    private val startForImageResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val resultCode = result.resultCode
-            val data = result.data
+    fun parseRaceInfoAndNavigate(toFragmentAction: Int, view: View) {
+        val newName = binding.editName.text.toString()
+        val newDate = binding.editDate.text.toString()
+        raceInfo = RaceData(newName, newDate, null, null)
+        val parsedData = Gson().toJson(raceInfo, object : TypeToken<RaceData>() {}.type)
+        val bundle = Bundle()
+        bundle.putString("raceName", newName)
+        bundle.putString("raceDate", newDate)
+        bundle.putString("raceInfo", parsedData)
+        bundle.putBoolean("NEW_RACE", true)
+        val fragment = RaceDetailFragment()
+        fragment.arguments = bundle
+        Utils.Navigation.navigateTo(requireActivity(), toFragmentAction, bundle)
+    }
 
-            if (resultCode == Activity.RESULT_OK) {
-                val fileUri = data?.data!!
-                imageUri = fileUri
-                binding.imageAvatar.setImageURI(fileUri)
-            }
-        }
 
     private fun showDatePicker() {
         val datePicker = DatePickerFragment { day, month, year -> onSelectedDate(day, month, year) }
@@ -80,41 +89,12 @@ class AddRaceFragment : Fragment() {
         date.set(Calendar.DAY_OF_MONTH, day)
         date.set(Calendar.MONTH, month)
         date.set(Calendar.YEAR, year)
-        dateTime = date.time
         binding.editDate.setText(dateFormat.format(date.time))
     }
 
-    private fun createRace() {
-        val name = binding.editName.text.toString()
-        val date = binding.editDate.text.toString()
-        if (name.isEmpty() || date.isEmpty()) {
-            Toast.makeText(requireContext(), "Por favor completa los campos", Toast.LENGTH_LONG)
-                .show()
-        } else {
-            val ships = Prefs(requireContext()).getShipsFromStorage()
-            val currentRaces = Prefs(requireContext()).getRacesFromStorage()
-            if (currentRaces != null) raceList = currentRaces
-            println(imageUri.toString())
-            if (ships != null && ships.size > 0) {
-                val race = RaceData(name, date, null, ships, false, imageUri.toString())
-                raceList.add(race)
-                Prefs(requireContext()).saveRace(raceList)
-                Toast.makeText(requireContext(), "Carrera creada", Toast.LENGTH_SHORT).show()
-                resetInputs()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "No hay barcos para esta carrera",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-    }
 
     fun resetInputs() {
         binding.editName.setText("")
         binding.editDate.setText("")
-        binding.imageAvatar.setImageURI(null)
-        binding.imageAvatar.setBackgroundResource(R.drawable.upload_img)
     }
 }

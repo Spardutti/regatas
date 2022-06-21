@@ -18,7 +18,7 @@ class RaceAdapter(val raceList: MutableList<RaceData>) : RecyclerView.Adapter<Ra
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return RaceViewHolder(layoutInflater.inflate(R.layout.race_list, parent, false))
+        return RaceViewHolder(layoutInflater.inflate(R.layout.list_race, parent, false))
     }
 
     override fun onBindViewHolder(holder: RaceViewHolder, position: Int) {
@@ -41,7 +41,7 @@ class RaceAdapter(val raceList: MutableList<RaceData>) : RecyclerView.Adapter<Ra
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.edit_race_dialog)
+        dialog.setContentView(R.layout.dialog_edit_race)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT

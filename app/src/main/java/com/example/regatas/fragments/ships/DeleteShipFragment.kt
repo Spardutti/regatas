@@ -7,10 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.commit
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
@@ -55,7 +53,7 @@ class DeleteShipFragment : Fragment() {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.confirm_deleteall_dialog)
+        dialog.setContentView(R.layout.dialog_confirm_deleteall)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -70,12 +68,8 @@ class DeleteShipFragment : Fragment() {
         yesBtn.setOnClickListener {
             DeleteShipAdapter(shipList).removeAllShips(it.context)
             binding.recyclerDeleteShip.adapter?.notifyItemRangeRemoved(0, shipList.size)
-
-            val navhostFragment =
-                activity?.supportFragmentManager?.findFragmentById(R.id.nav_host) as NavHostFragment
-            val navController = navhostFragment.navController
-            navController.navigate(R.id.action_deleteShipFragment_to_shipFragment)
-            navController.popBackStack(R.id.deleteShipFragment, true)
+            Navigation.findNavController(requireView()).navigate(R.id.action_deleteShipFragment_to_shipFragment)
+            Navigation.findNavController(requireView()).popBackStack()
 
             dialog.dismiss()
         }

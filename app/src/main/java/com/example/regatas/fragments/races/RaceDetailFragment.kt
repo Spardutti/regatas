@@ -11,14 +11,18 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceShipListInterface
-import com.example.regatas.data.RaceData
 import com.example.regatas.adapters.raceshiplist.RaceShipListAdapter
+import com.example.regatas.data.RaceData
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentRaceDetailBinding
 import com.example.regatas.prefs.Prefs
+import com.example.regatas.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.*
@@ -32,7 +36,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     lateinit var timer: Chronometer
     lateinit var startStop: ImageView
     var timeWhenStopped: Long = 0
-    var shipList = mutableListOf<ShipData>()
+    var shipList: MutableList<ShipData> = mutableListOf()
     private var shipsFinishedCount = 0
 
     override fun onCreateView(
@@ -108,7 +112,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         }
 
         val ships = raceInfo.shipsList
-        shipList = ships!!
+        if (ships != null) shipList = ships
     }
 
     /* start stop chrono timer */
@@ -125,15 +129,18 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     }
 
     fun initRecyclerView() {
-        if (raceInfo.isFinished) {
-            shipList.sortWith(compareBy({ !it.isFinished }, { it.time }))
-        } else {
-            shipList.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+        if (shipList.size > 0) {
+            if (raceInfo.isFinished) {
+                shipList.sortWith(compareBy({ !it.isFinished }, { it.time }))
+            } else {
+                shipList.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+            }
+            val adapter = RaceShipListAdapter(shipList)
+            adapter.setOnShipTime(this)
+            binding.recyclerRaceShipList.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerRaceShipList.adapter = adapter
         }
-        val adapter = RaceShipListAdapter(shipList)
-        adapter.setOnShipTime(this)
-        binding.recyclerRaceShipList.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerRaceShipList.adapter = adapter
+
     }
 
     /* Assigns the current time to the clicked ships, and set isFinished to true.
@@ -239,7 +246,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.edit_race_dialog)
+        dialog.setContentView(R.layout.dialog_edit_race)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT
@@ -265,10 +272,30 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         dialog.show()
     }
 
+    fun deleteRace() {
+        val storageRaces = Prefs(requireContext()).getRacesFromStorage()
+        val racesIterator = storageRaces?.iterator()
+        while (racesIterator!!.hasNext()) {
+            val race = racesIterator.next()
+            if (race == raceInfo) {
+                racesIterator.remove()
+                Prefs(requireContext()).saveRace(storageRaces)
+                Toast.makeText(requireContext(), "Carrera ${raceInfo.name} eliminada", Toast.LENGTH_SHORT).show()
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_raceDetailFragment_to_raceFragment)
+                Navigation.findNavController(requireView()).popBackStack()
+                break
+            }
+        }
+    }
+
+
     /* checks whether race is finished or not to display export icon */
     override fun onPrepareOptionsMenu(menu: Menu) {
         val export = menu.findItem(R.id.export)
         export.isVisible = raceInfo.isFinished
+        val edit = menu.findItem(R.id.edit)
+        edit.isVisible = !raceInfo.isFinished
         super.onPrepareOptionsMenu(menu)
     }
 
@@ -283,11 +310,15 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.edit -> {
-                editRaceDialog(raceInfo.name)
+                parseRaceInfoAndNavigate(R.id.action_raceDetailFragment_to_editRaceFragment)
                 true
             }
             R.id.export -> {
                 saveData()
+                true
+            }
+            R.id.delete -> {
+                deleteRace()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -364,5 +395,18 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         } catch (e: IOException) {
             e.printStackTrace()
         }
+    }
+
+    fun parseRaceInfoAndNavigate(toFragmentAction: Int) {
+        val newName = raceInfo.name
+        val newDate = raceInfo.date
+        val parsedData = Gson().toJson(raceInfo, object : TypeToken<RaceData>() {}.type)
+        val bundle = Bundle()
+        bundle.putString("raceName", newName)
+        bundle.putString("raceDate", newDate)
+        bundle.putString("raceInfo", parsedData)
+        val fragment = RaceDetailFragment()
+        fragment.arguments = bundle
+        Utils.Navigation.navigateTo(requireActivity(), toFragmentAction, bundle)
     }
 }

@@ -8,5 +8,6 @@ data class ShipData(
     val serie: String?,
     var time: String?,
     var isFinished: Boolean = false,
-    var avatar: String?
+    var avatar: String?,
+    var isSelected: Boolean = false,
 )

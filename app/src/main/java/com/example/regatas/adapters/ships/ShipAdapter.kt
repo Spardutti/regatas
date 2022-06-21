@@ -18,7 +18,7 @@ class ShipAdapter(val shiplist: MutableList<ShipData>) : RecyclerView.Adapter<Sh
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShipViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        return ShipViewHolder(layoutInflater.inflate(R.layout.ship_list, parent, false))
+        return ShipViewHolder(layoutInflater.inflate(R.layout.list_ship, parent, false))
     }
 
     override fun onBindViewHolder(holder: ShipViewHolder, position: Int) {
@@ -33,7 +33,7 @@ class ShipAdapter(val shiplist: MutableList<ShipData>) : RecyclerView.Adapter<Sh
         val dialog = Dialog(context)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setCancelable(false)
-        dialog.setContentView(R.layout.edit_ship_dialog)
+        dialog.setContentView(R.layout.dialog_edit_ship)
         dialog.window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT

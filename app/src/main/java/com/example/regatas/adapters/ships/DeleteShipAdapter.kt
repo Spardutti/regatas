@@ -14,7 +14,7 @@ class DeleteShipAdapter(val shipList: MutableList<ShipData>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeleteShipViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return DeleteShipViewHolder(layoutInflater.inflate(R.layout.deleteship_list, parent, false))
+        return DeleteShipViewHolder(layoutInflater.inflate(R.layout.list_deleteship, parent, false))
     }
 
     override fun onBindViewHolder(holder: DeleteShipViewHolder, position: Int) {
