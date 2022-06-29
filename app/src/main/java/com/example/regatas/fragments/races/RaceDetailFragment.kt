@@ -407,6 +407,6 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         bundle.putString("raceInfo", parsedData)
         val fragment = RaceDetailFragment()
         fragment.arguments = bundle
-        Utils.Navigation.navigateTo(requireActivity(), toFragmentAction, bundle)
+        Utils.navigateTo(requireActivity(), toFragmentAction, bundle)
     }
 }

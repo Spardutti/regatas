@@ -72,7 +72,7 @@ class AddRaceFragment : Fragment() {
         bundle.putBoolean("NEW_RACE", true)
         val fragment = RaceDetailFragment()
         fragment.arguments = bundle
-        Utils.Navigation.navigateTo(requireActivity(), toFragmentAction, bundle)
+        Utils.navigateTo(requireActivity(), toFragmentAction, bundle)
     }
 
 

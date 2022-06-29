@@ -2,4 +2,11 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
     <dimen name="text_main">35sp</dimen>
+    <dimen name="card_width">160dp</dimen>
+    <dimen name="card_height">200dp</dimen>
+    <dimen name="card_radius_8">8dp</dimen>
+    <dimen name="card_elevation_4">4dp</dimen>
+    <dimen name="card_img_width">150dp</dimen>
+    <dimen name="card_img_height">150dp</dimen>
+    <dimen name="card_img_radius_4">4dp</dimen>
 </resources>

@@ -26,91 +26,84 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class Utils {
+object Utils {
     /* creates an image file*/
-    object ImageUtils {
-
-        fun imagePickerConfig(fragment: Fragment): ImagePicker.Builder {
-            return ImagePicker.Companion.with(fragment).crop(1f, 1f).maxResultSize(320, 320)
-                .compress(1024)
-                .galleryMimeTypes(  //Exclude gif images
-                    mimeTypes = arrayOf(
-                        "image/png",
-                        "image/jpg",
-                        "image/jpeg"
-                    )
+    fun imagePickerConfig(fragment: Fragment): ImagePicker.Builder {
+        return ImagePicker.Companion.with(fragment).crop(1f, 1f).maxResultSize(320, 320)
+            .compress(1024)
+            .galleryMimeTypes(  //Exclude gif images
+                mimeTypes = arrayOf(
+                    "image/png",
+                    "image/jpg",
+                    "image/jpeg"
                 )
-        }
+            )
     }
 
     /* dialogs to choose between gallery and camera */
-    object Dialog {
-        fun cameraGalleryDialog(
-            context: Context,
-            imagePicker: ImagePicker.Builder,
-            startForImageResult: ActivityResultLauncher<Intent>
-        ) {
-            val dialog = Dialog(context)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(true)
-            dialog.setContentView(R.layout.dialog_picker)
-            dialog.window?.setLayout(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
+    fun cameraGalleryDialog(
+        context: Context,
+        imagePicker: ImagePicker.Builder,
+        startForImageResult: ActivityResultLauncher<Intent>
+    ) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setContentView(R.layout.dialog_picker)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
-            val cameraBtn: Button = dialog.findViewById(R.id.camera)
-            val galleryBtn: Button = dialog.findViewById(R.id.gallery)
+        val cameraBtn: Button = dialog.findViewById(R.id.camera)
+        val galleryBtn: Button = dialog.findViewById(R.id.gallery)
 
-            galleryBtn.setOnClickListener {
-                imagePicker.galleryOnly()
-                    .createIntent { intent -> startForImageResult.launch(intent) }
-                dialog.dismiss()
-            }
-
-            cameraBtn.setOnClickListener {
-                imagePicker.cameraOnly()
-                    .createIntent { intent -> startForImageResult.launch(intent) }
-                dialog.dismiss()
-            }
-            dialog.show()
+        galleryBtn.setOnClickListener {
+            imagePicker.galleryOnly()
+                .createIntent { intent -> startForImageResult.launch(intent) }
+            dialog.dismiss()
         }
+
+        cameraBtn.setOnClickListener {
+            imagePicker.cameraOnly()
+                .createIntent { intent -> startForImageResult.launch(intent) }
+            dialog.dismiss()
+        }
+        dialog.show()
     }
 
-    object Navigation {
-        fun navigateTo(activity: FragmentActivity, toFragment: Int, bundle: Bundle?) {
-            val navhostFragment =
-                activity.supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
-            val navController = navhostFragment.navController
-            navController.navigate(toFragment, bundle)
-        }
+    fun navigateTo(activity: FragmentActivity, toFragment: Int, bundle: Bundle?) {
+        val navhostFragment =
+            activity.supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+        val navController = navhostFragment.navController
+        navController.navigate(toFragment, bundle)
     }
 
-    object Races {
-        fun saveRace(
-            context: Context,
-            raceInfo: RaceData?,
-            newRaceName: String?,
-            newRaceDate: String?,
-            selectedShipList: MutableList<ShipData>?,
+
+
+    fun saveRace(
+        context: Context,
+        raceInfo: RaceData?,
+        newRaceName: String?,
+        newRaceDate: String?,
+        selectedShipList: MutableList<ShipData>?,
         isNewRace: Boolean
-        ) {
-            val currentRaces = Prefs(context).getRacesFromStorage()
-            var raceList: MutableList<RaceData> = mutableListOf()
-            if (currentRaces != null) raceList = currentRaces
-            raceList.remove(raceInfo)
-            val race = RaceData(
-                newRaceName ?: raceInfo!!.name,
-                newRaceDate ?: raceInfo!!.date,
-                null,
-                selectedShipList,
-                false
-            )
-            raceList.add(race)
-            Prefs(context).saveRace(raceList)
-            if(isNewRace) Toast.makeText(context, "Carrera creada", Toast.LENGTH_SHORT).show()
-            else Toast.makeText(context, "Cambios guardados", Toast.LENGTH_SHORT).show()
-        }
+    ) {
+        val currentRaces = Prefs(context).getRacesFromStorage()
+        var raceList: MutableList<RaceData> = mutableListOf()
+        if (currentRaces != null) raceList = currentRaces
+        raceList.remove(raceInfo)
+        val race = RaceData(
+            newRaceName ?: raceInfo!!.name,
+            newRaceDate ?: raceInfo!!.date,
+            null,
+            selectedShipList,
+            false
+        )
+        raceList.add(race)
+        Prefs(context).saveRace(raceList)
+        if (isNewRace) Toast.makeText(context, "Carrera creada", Toast.LENGTH_SHORT).show()
+        else Toast.makeText(context, "Cambios guardados", Toast.LENGTH_SHORT).show()
     }
 
 }

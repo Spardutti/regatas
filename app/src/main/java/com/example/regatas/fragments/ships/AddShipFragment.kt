@@ -47,17 +47,17 @@ class AddShipFragment : Fragment() {
         }
 
         binding.imageAvatar.setOnClickListener {
-            Utils.Dialog.cameraGalleryDialog(
+            Utils.cameraGalleryDialog(
                 requireContext(),
-                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                Utils.imagePickerConfig(requireParentFragment()),
                 startForProfileImageResult
             )
         }
 
         binding.editPen.setOnClickListener {
-            Utils.Dialog.cameraGalleryDialog(
+            Utils.cameraGalleryDialog(
                 requireContext(),
-                Utils.ImageUtils.imagePickerConfig(requireParentFragment()),
+                Utils.imagePickerConfig(requireParentFragment()),
                 startForProfileImageResult
             )
         }

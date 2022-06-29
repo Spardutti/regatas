@@ -47,7 +47,7 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
 
         binding.btnSaveChanges.setOnClickListener {
 
-            Utils.Races.saveRace(
+            Utils.saveRace(
                 requireContext(),
                 raceInfo,
                 newRaceName,
@@ -55,7 +55,7 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
                 selectedShipList,
                 isNewRace
             )
-            Utils.Navigation.navigateTo(
+            Utils.navigateTo(
                 requireActivity(),
                 R.id.action_addShipToRaceFragment_to_raceFragment,
                 null

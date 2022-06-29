@@ -1,17 +1,27 @@
 package com.example.regatas.fragments
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.helper.widget.Carousel
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import com.example.regatas.R
+import com.example.regatas.carousel.CarouselHelper
+import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentHomeBinding
+import com.example.regatas.prefs.Prefs
+
 
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
+    var shipList: MutableList<ShipData>? = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,14 +29,38 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        binding.btnShips.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_shipFragment)
-        )
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
-        binding.btnRaces.setOnClickListener (
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_raceFragment)
-        )
+//        binding.btnShips.setOnClickListener(
+//            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_shipFragment)
+//        )
+//
+//        binding.btnRaces.setOnClickListener (
+//            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_raceFragment)
+//        )
+        getShips()
+
+        getRaces()
 
         return binding.root
     }
+
+    private fun getShips() {
+        shipList = Prefs(requireContext()).getShipsFromStorage()
+
+        if (shipList?.size != 0 && shipList != null) {
+            shipList!!.sortBy { it.name }
+            CarouselHelper.winnerCarousel(shipList!!, binding.winnerCarousel.carousel)
+        } else {
+            binding.winnerCarousel.root.visibility = View.GONE
+        }
+    }
+
+    private fun getRaces() {
+        val raceList = Prefs(requireContext()).getRacesFromStorage()
+        if (raceList?.size != 0) {
+            CarouselHelper.racesCarousel(raceList!!, binding.racesCarousel.carousel)
+        }
+    }
+
 }

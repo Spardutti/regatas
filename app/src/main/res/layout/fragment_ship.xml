@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="56dp"
     tools:context=".fragments.ships.ShipFragment">
 
     <EditText
@@ -30,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_marginEnd="22dp"
-        android:layout_marginBottom="33dp"
+        android:layout_marginBottom="76dp"
         android:contentDescription="add ship"
         android:backgroundTint="@color/lightpurple"
         app:tint="@color/white"
@@ -44,7 +45,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="31dp"
         android:clipToPadding="false"
-        android:paddingBottom="170dp"
+        android:paddingBottom="220dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_min="500dp"

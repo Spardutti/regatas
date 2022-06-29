@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/boats"
+        android:icon="@drawable/ic_vectorship"
+        android:title="Boats" />
+
+    <item
+        android:id="@+id/home"
+        android:title="Home" />
+
+    <item android:id="@+id/races"
+        android:icon="@drawable/ic_flag"
+        android:title="Races"
+        />
+</menu>

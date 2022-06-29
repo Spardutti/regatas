@@ -51,7 +51,7 @@ class EditRaceFragment : Fragment() {
 
 
         binding.btnAddRace.setOnClickListener {
-            Utils.Races.saveRace(
+            Utils.saveRace(
                 requireContext(),
                 raceInfo,
                 binding.editName.text.toString(),
@@ -59,7 +59,7 @@ class EditRaceFragment : Fragment() {
                 selectedShipList,
                 false
             )
-            Utils.Navigation.navigateTo(
+            Utils.navigateTo(
                 requireActivity(),
                 R.id.action_editRaceFragment_to_raceFragment,
                 null
@@ -124,7 +124,7 @@ class EditRaceFragment : Fragment() {
         bundle.putString("raceInfo", parsedData)
         val fragment = RaceDetailFragment()
         fragment.arguments = bundle
-        Utils.Navigation.navigateTo(requireActivity(), toFragmentAction, bundle)
+        Utils.navigateTo(requireActivity(), toFragmentAction, bundle)
     }
 
 }
