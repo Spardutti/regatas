@@ -15,7 +15,8 @@
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/drawable/shadow_drawable.xml" value="0.1545" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/card_winners.xml" value="0.19635416666666666" />
-        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/carousel_cards.xml" value="0.25" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/cards_races.xml" value="0.3" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/carousel_cards.xml" value="0.1" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/carousel_ships.xml" value="0.1" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/carousel_winners.xml" value="0.2" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/deleteship_list.xml" value="0.12" />
@@ -45,6 +46,7 @@
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/menu/bottom_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/menu/race_menu.xml" value="0.9" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/menu/ship_menu.xml" value="0.3388888888888889" />
+        <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/xml/cards_races_scene.xml" value="0.16621376811594202" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/xml/carousel_ships.xml" value="0.18854166666666666" />
       </map>
     </option>

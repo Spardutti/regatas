@@ -1,4 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
 
-</PreferenceScreen>
+    <Transition
+        android:id="@+id/forward"
+        motion:constraintSetEnd="@+id/next"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <KeyFrameSet></KeyFrameSet>
+        <OnSwipe
+            motion:dragDirection="dragLeft"
+            motion:touchAnchorSide="left" />
+    </Transition>
+
+    <Transition
+        android:id="@+id/backward"
+        motion:constraintSetEnd="@+id/previous"
+        motion:constraintSetStart="@+id/start">
+
+        <OnSwipe
+            motion:dragDirection="dragRight"
+            motion:touchAnchorSide="right" />
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/previous">
+        <Constraint
+            android:id="@+id/cardView2"
+            android:layout_width="@dimen/card_ships_width"
+        android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/cardView1"
+            android:layout_marginStart="8dp" />
+        <Constraint
+            android:id="@+id/cardView3"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/cardView2"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" />
+        <Constraint
+            android:id="@+id/cardView1"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintEnd_toStartOf="@+id/cardView2"
+            android:layout_marginEnd="8dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            android:id="@+id/cardView3"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toEndOf="@id/cardView2"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/cardView2"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            android:layout_marginStart="8dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/cardView1"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp" />
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/next">
+        <Constraint
+            android:id="@+id/cardView1"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/cardView2"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="8dp" />
+        <Constraint
+            android:id="@+id/cardView3"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp" />
+        <Constraint
+            android:id="@+id/cardView4"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/cards_races_height"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/cardView3"
+            android:layout_marginStart="8dp" />
+    </ConstraintSet>
+
+</MotionScene>

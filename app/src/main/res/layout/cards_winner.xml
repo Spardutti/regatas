@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    app:layoutDescription="@xml/carousel_cards_scene">
+    app:layoutDescription="@xml/cards_winners_scene">
 
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView1"
-        android:layout_width="@dimen/card_width"
-        android:layout_height="@dimen/card_height"
+        android:layout_width="@dimen/card_ships_width"
+        android:layout_height="@dimen/card_ships_height"
         android:backgroundTint="@color/card_bg_color"
         app:cardCornerRadius="@dimen/card_radius_8"
         app:cardElevation="@dimen/card_elevation_4"
@@ -69,8 +69,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView2"
-        android:layout_width="@dimen/card_width"
-        android:layout_height="@dimen/card_height"
+        android:layout_width="@dimen/card_ships_width"
+        android:layout_height="@dimen/card_ships_height"
         android:backgroundTint="@color/card_bg_color"
         app:cardCornerRadius="@dimen/card_radius_8"
         app:cardElevation="@dimen/card_elevation_4"
@@ -131,8 +131,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView3"
-        android:layout_width="@dimen/card_width"
-        android:layout_height="@dimen/card_height"
+        android:layout_width="@dimen/card_ships_width"
+        android:layout_height="@dimen/card_ships_height"
         android:backgroundTint="@color/card_bg_color"
         app:cardCornerRadius="@dimen/card_radius_8"
         app:cardElevation="@dimen/card_elevation_4"
@@ -192,8 +192,8 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView4"
-        android:layout_width="@dimen/card_width"
-        android:layout_height="@dimen/card_height"
+        android:layout_width="@dimen/card_ships_width"
+        android:layout_height="@dimen/card_ships_height"
         android:layout_marginStart="8dp"
         android:backgroundTint="@color/card_bg_color"
         app:cardCornerRadius="@dimen/card_radius_8"

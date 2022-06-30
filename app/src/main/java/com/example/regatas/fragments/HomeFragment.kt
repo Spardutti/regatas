@@ -21,7 +21,6 @@ import com.example.regatas.prefs.Prefs
 class HomeFragment : Fragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    var shipList: MutableList<ShipData>? = mutableListOf()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,13 +30,6 @@ class HomeFragment : Fragment() {
 
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
-//        binding.btnShips.setOnClickListener(
-//            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_shipFragment)
-//        )
-//
-//        binding.btnRaces.setOnClickListener (
-//            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_raceFragment)
-//        )
         getShips()
 
         getRaces()
@@ -46,11 +38,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun getShips() {
-        shipList = Prefs(requireContext()).getShipsFromStorage()
+        val shipList = Prefs(requireContext()).getShipsFromStorage()
 
         if (shipList?.size != 0 && shipList != null) {
-            shipList!!.sortBy { it.name }
-            CarouselHelper.winnerCarousel(shipList!!, binding.winnerCarousel.carousel)
+            shipList.sortBy { it.name }
+            CarouselHelper.winnerCarousel(shipList, binding.winnerCarousel.carousel)
+            CarouselHelper.recordsCarousel(shipList, binding.recordsCarousel.carousel)
         } else {
             binding.winnerCarousel.root.visibility = View.GONE
         }
@@ -62,5 +55,4 @@ class HomeFragment : Fragment() {
             CarouselHelper.racesCarousel(raceList!!, binding.racesCarousel.carousel)
         }
     }
-
 }

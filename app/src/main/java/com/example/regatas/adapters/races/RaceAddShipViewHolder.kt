@@ -16,7 +16,7 @@ class RaceAddShipViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(shipList: ShipData) {
         binding.textShipName.text = shipList.name
 
-        if (shipList.avatar != "null") binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
+        if (shipList.avatar != "null" && shipList.avatar != null) binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
 
         binding.checkboxSelectShip.isChecked = shipList.isSelected
         binding.checkboxSelectShip.setOnClickListener {
