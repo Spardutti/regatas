@@ -27,8 +27,8 @@
     <ConstraintSet android:id="@+id/previous">
         <Constraint
             android:id="@+id/cardView2"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
@@ -36,8 +36,8 @@
             android:layout_marginStart="8dp" />
         <Constraint
             android:id="@+id/cardView3"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toEndOf="@id/cardView2"
@@ -45,8 +45,8 @@
             android:layout_marginStart="8dp" />
         <Constraint
             android:id="@+id/cardView1"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
@@ -59,8 +59,8 @@
     <ConstraintSet android:id="@+id/start">
         <Constraint
             android:id="@+id/cardView3"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             motion:layout_constraintBottom_toBottomOf="parent"
@@ -68,16 +68,16 @@
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/cardView2"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
             android:layout_marginStart="8dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/cardView1"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
@@ -88,16 +88,16 @@
     <ConstraintSet android:id="@+id/next">
         <Constraint
             android:id="@+id/cardView1"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/cardView2"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toStartOf="parent"
@@ -105,8 +105,8 @@
             android:layout_marginEnd="8dp" />
         <Constraint
             android:id="@+id/cardView3"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -114,8 +114,8 @@
             android:layout_marginStart="8dp" />
         <Constraint
             android:id="@+id/cardView4"
-            android:layout_width="160dp"
-            android:layout_height="200dp"
+            android:layout_width="@dimen/card_ships_width"
+            android:layout_height="@dimen/card_ships_height"
 
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toTopOf="parent"
