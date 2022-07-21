@@ -54,6 +54,7 @@ class ShipFragment : Fragment(), ActivityCompat.OnRequestPermissionsResultCallba
 
         binding = FragmentShipBinding.inflate(inflater, container, false)
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         /* editText filter overrides */
         binding.autoCompleteTextView.addTextChangedListener(object : TextWatcher {

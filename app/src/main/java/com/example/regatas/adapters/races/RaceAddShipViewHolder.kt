@@ -9,7 +9,7 @@ import com.example.regatas.databinding.ListAddshipBinding
 
 class RaceAddShipViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    lateinit var addShipInterface: RaceAddShipInterface
+    private lateinit var addShipInterface: RaceAddShipInterface
     val binding = ListAddshipBinding.bind(view)
 
 

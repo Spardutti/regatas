@@ -10,4 +10,15 @@
     <string name="datos">Datos</string>
     <string name="ready_to_sail">Ready to Sail!</string>
     <string name="winning_boats">Winning Boats</string>
+    <string name="emtpy_home_msg">Looks like you haven\'t created races yet. Let\'s begin!</string>
+    <string name="search_races">Search Races</string>
+    <string name="enter_race_name">Enter race name</string>
+    <string name="enter_race_date">Enter race date</string>
+    <string name="add_boats">add boats</string>
+    <string name="search_boats">Search Boats</string>
+    <string name="ups_we_notice_that_you_didn_t_add_boats">Ups! we notice that you didn\'t add boats</string>
+    <string name="save_race">Save Race</string>
+    <string name="save_changes">Save changes</string>
+    <string name="pending">Pending</string>
+    <string name="race_finished">Finished</string>
 </resources>

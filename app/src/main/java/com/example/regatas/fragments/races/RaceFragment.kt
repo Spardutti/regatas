@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +26,9 @@ class RaceFragment : Fragment() {
     ): View {
 
         binding = FragmentRaceBinding.inflate(inflater, container, false)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(false)
 
         binding.btnAddRace.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_raceFragment_to_addRaceFragment)
@@ -72,4 +76,5 @@ class RaceFragment : Fragment() {
         originalList = newList as MutableList<RaceData>
         binding.recyclerRaces.adapter = RaceAdapter(originalList)
     }
+
 }

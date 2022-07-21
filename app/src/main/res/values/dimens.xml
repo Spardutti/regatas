@@ -11,4 +11,6 @@
     <dimen name="card_img_radius_4">4dp</dimen>
     <dimen name="cards_races_width">160dp</dimen>
     <dimen name="cards_races_height">211dp</dimen>
+    <dimen name="top_margin_nav">56dp</dimen>
+    <dimen name="margin_12">12dp</dimen>
 </resources>

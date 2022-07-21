@@ -22,6 +22,7 @@ import com.example.regatas.databinding.FragmentAddRaceBinding
 import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
 import com.example.tasker.fragments.DatePickerFragment
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.text.SimpleDateFormat
@@ -40,11 +41,11 @@ class AddRaceFragment : Fragment() {
     ): View {
         binding = FragmentAddRaceBinding.inflate(inflater, container, false)
 
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+
         binding.editDate.setOnClickListener {
             showDatePicker()
         }
-
-
 
         binding.btnAddShips.setOnClickListener {
             if (binding.editName.text.isNotEmpty() && binding.editDate.text.isNotEmpty()) {
@@ -52,8 +53,11 @@ class AddRaceFragment : Fragment() {
                     R.id.action_addRaceFragment_to_addShipToRaceFragment,
                     it
                 )
-                (requireActivity() as AppCompatActivity).supportActionBar?.title =
-                    binding.editName.text.toString()
+//                (requireActivity() as AppCompatActivity).supportActionBar?.title =
+//                    binding.editName.text.toString()
+            }
+            else {
+                Snackbar.make(requireView(), "Please enter a name and date", Snackbar.LENGTH_SHORT).show()
             }
         }
 

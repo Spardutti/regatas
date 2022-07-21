@@ -80,8 +80,8 @@
     <fragment
         android:id="@+id/raceFragment"
         android:name="com.example.regatas.fragments.races.RaceFragment"
-        android:label="Carreras"
-        tools:layout="@layout/fragment_race" >
+        android:label="Races"
+        tools:layout="@layout/fragment_race">
         <action
             android:id="@+id/action_raceFragment_to_addRaceFragment"
             app:destination="@id/addRaceFragment"
@@ -121,8 +121,8 @@
     <fragment
         android:id="@+id/addRaceFragment"
         android:name="com.example.regatas.fragments.races.AddRaceFragment"
-        android:label="Agregar Carrera"
-        tools:layout="@layout/fragment_add_race" >
+        android:label="New Race"
+        tools:layout="@layout/fragment_add_race">
         <action
             android:id="@+id/action_addRaceFragment_to_raceFragment"
             app:destination="@id/raceFragment"
@@ -168,8 +168,8 @@
     <fragment
         android:id="@+id/addShipToRaceFragment"
         android:name="com.example.regatas.fragments.races.AddShipToRaceFragment"
-        android:label="fragment_add_ship_to_race"
-        tools:layout="@layout/fragment_add_ship_to_race" >
+        android:label="New Race"
+        tools:layout="@layout/fragment_add_ship_to_race">
         <action
             android:id="@+id/action_addShipToRaceFragment_to_editRaceFragment"
             app:destination="@id/editRaceFragment" />

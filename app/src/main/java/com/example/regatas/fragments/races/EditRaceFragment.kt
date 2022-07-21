@@ -6,21 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.regatas.R
-import com.example.regatas.`interface`.RaceAddShipInterface
-import com.example.regatas.adapters.races.RaceAddShipAdapter
+
 import com.example.regatas.adapters.races.RaceShipsAdapter
-import com.example.regatas.adapters.ships.ShipAdapter
+
 import com.example.regatas.data.RaceData
 import com.example.regatas.data.ShipData
 import com.example.regatas.databinding.FragmentEditRaceBinding
-import com.example.regatas.prefs.Prefs
 import com.example.regatas.utils.Utils
 import com.example.tasker.fragments.DatePickerFragment
 import com.google.gson.Gson

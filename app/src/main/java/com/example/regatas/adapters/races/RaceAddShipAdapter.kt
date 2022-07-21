@@ -9,7 +9,7 @@ import com.example.regatas.data.ShipData
 
 class RaceAddShipAdapter(val shipList: MutableList<ShipData>) :
     RecyclerView.Adapter<RaceAddShipViewHolder>() {
-    lateinit var addShipInterface: RaceAddShipInterface
+    private lateinit var addShipInterface: RaceAddShipInterface
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RaceAddShipViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

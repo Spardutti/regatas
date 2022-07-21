@@ -1,5 +1,6 @@
 package com.example.regatas.utils
 
+import android.animation.AnimatorSet
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
@@ -13,6 +14,8 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.ActivityNavigator
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.NavHostFragment
 import com.example.regatas.R
 import com.example.regatas.data.RaceData
@@ -75,10 +78,11 @@ object Utils {
     fun navigateTo(activity: FragmentActivity, toFragment: Int, bundle: Bundle?) {
         val navhostFragment =
             activity.supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
+
         val navController = navhostFragment.navController
+
         navController.navigate(toFragment, bundle)
     }
-
 
 
     fun saveRace(

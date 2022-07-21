@@ -13,13 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
+import com.example.regatas.`interface`.FragmentSelectedInterface
 import com.example.regatas.databinding.ActivityMainBinding
 import com.example.regatas.fragments.HomeFragment
 import com.example.regatas.fragments.ships.ShipFragment
 import com.example.regatas.utils.Utils
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FragmentSelectedInterface {
 
     lateinit var binding: ActivityMainBinding
 
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host) as NavHostFragment
         val navController = navHostFragment.navController
@@ -35,52 +37,16 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupActionBarWithNavController(this, navController)
 
         binding.menuBottom.setOnItemSelectedListener {
-            val currentFragment = navController.currentDestination?.id
             when (it.itemId) {
+
                 R.id.home -> {
-                    if (currentFragment == R.id.shipFragment) {
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_shipFragment_to_homeFragment,
-                            null
-                        )
-                    } else if (currentFragment == R.id.raceFragment) {
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_raceFragment_to_homeFragment,
-                            null
-                        )
-                    }
+                    Utils.navigateTo(this@MainActivity, R.id.homeFragment, null)
                 }
                 R.id.races -> {
-                    if (currentFragment == R.id.homeFragment) {
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_homeFragment_to_raceFragment,
-                            null
-                        )
-                    } else if ( currentFragment == R.id.shipFragment){
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_shipFragment_to_raceFragment,
-                            null
-                        )
-                    }
+                    Utils.navigateTo(this@MainActivity, R.id.raceFragment, null)
                 }
                 R.id.boats -> {
-                    if (currentFragment == R.id.homeFragment) {
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_homeFragment_to_shipFragment,
-                            null
-                        )
-                    } else if(currentFragment == R.id.raceFragment){
-                        Utils.navigateTo(
-                            this@MainActivity,
-                            R.id.action_raceFragment_to_shipFragment,
-                            null
-                        )
-                    }
+                    Utils.navigateTo(this@MainActivity, R.id.shipFragment, null)
                 }
             }
             true
@@ -111,4 +77,10 @@ class MainActivity : AppCompatActivity() {
         }
         return super.dispatchTouchEvent(event)
     }
+
+    override fun fragmentSelected(position: Int) {
+        binding.menuBottom.menu.findItem(position).isChecked = true
+    }
+
+
 }

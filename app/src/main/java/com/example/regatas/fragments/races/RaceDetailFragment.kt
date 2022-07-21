@@ -62,18 +62,18 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
             centerTimer()
         }
 
-        /* ONChange listener for editText */
-        binding.editSearchShip.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                filterList(p0!!)
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-        })
+//        /* ONChange listener for editText */
+//        binding.editSearchShip.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//            }
+//
+//            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+//                filterList(p0!!)
+//            }
+//
+//            override fun afterTextChanged(p0: Editable?) {
+//            }
+//        })
 
         /* format to 00:00:00*/
         chronoMeterFormat()

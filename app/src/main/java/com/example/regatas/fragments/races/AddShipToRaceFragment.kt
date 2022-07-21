@@ -43,7 +43,7 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
 
         getArgs()
 
-        if (isNewRace) binding.btnSaveChanges.text = "Crear carrera"
+        if (isNewRace) binding.btnSaveChanges.text = getString(R.string.save_race)
 
         binding.btnSaveChanges.setOnClickListener {
 
@@ -68,7 +68,7 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-           filterList(p0!!)
+                filterList(p0!!)
             }
 
             override fun afterTextChanged(p0: Editable?) {
@@ -77,6 +77,9 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
 
         })
 
+        binding.noBoats.addBoats.setOnClickListener {
+            Utils.navigateTo(requireActivity(), R.id.addShipFragment, null)
+        }
         return binding.root
     }
 
@@ -90,7 +93,7 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
         binding.recyclerAddShip.adapter = adapter
     }
 
-    fun getArgs() {
+    private fun getArgs() {
         val args = this.arguments?.getString("raceInfo")
         newRaceName = this.arguments?.getString("raceName")
         newRaceDate = this.arguments?.getString("raceDate")
@@ -102,7 +105,6 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
             selectedShipList =
                 raceInfo!!.shipsList?.map { it.copy() } as MutableList<ShipData>
         }
-
         addShipRecyclerList()
     }
 
@@ -115,14 +117,19 @@ class AddShipToRaceFragment : Fragment(), RaceAddShipInterface {
         ship.isSelected = !ship.isSelected
     }
 
-    fun addShipRecyclerList() {
+    private fun addShipRecyclerList() {
         val shipList = Prefs(requireContext()).getShipsFromStorage()
+        if (shipList == null) {
+            binding.container.visibility = View.GONE
+            binding.noBoats.root.visibility = View.VISIBLE
+            return
+        }
         val adapter: RaceAddShipAdapter?
 
-         newList = selectedShipList.map { it.copy() } as MutableList<ShipData>
+        newList = selectedShipList.map { it.copy() } as MutableList<ShipData>
 
-        newList!! += shipList?.filter { localObject ->
-            selectedShipList!!.all { it.name != localObject.name }
+        newList!! += shipList.filter { selectedShip ->
+            selectedShipList.all { it.name != selectedShip.name }
         } as MutableList<ShipData>
 
         adapter = RaceAddShipAdapter(newList!!)

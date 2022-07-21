@@ -3,6 +3,7 @@ package com.example.regatas.adapters.races
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings.Global.getString
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -27,14 +28,7 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(raceList: RaceData) {
         binding.raceName.text = raceList.name
-        binding.raceDate.text = raceList.date
-        if (raceList.time == null) binding.raceTime.text = "-:-"
-        else {
-            binding.raceTime.text = raceList.time
-            binding.raceTime.typeface = Typeface.DEFAULT_BOLD
-            binding.raceTime.setTextColor(ContextCompat.getColor(itemView.context, R.color.black))
 
-        }
 
         binding.editRaceName.setOnClickListener {
             parseRaceInfoAndNavigate(raceList, R.id.action_raceFragment_to_editRaceFragment, it)
@@ -47,8 +41,8 @@ class RaceViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         if (raceList.isFinished) {
-            binding.raceFlag.visibility = View.VISIBLE
-            binding.editRaceName.visibility = View.GONE
+            binding.pillStatus.text = itemView.context.getString(R.string.race_finished)
+            binding.pillStatus.backgroundTintList = itemView.context.resources.getColorStateList(R.color.finished_race)
         }
 
     }
