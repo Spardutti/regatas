@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
 import com.example.regatas.`interface`.RaceAddShipInterface
 import com.example.regatas.data.ShipData
+import com.example.regatas.fragments.races.RaceDetailFragment
 
 class RaceAddShipAdapter(val shipList: MutableList<ShipData>) :
     RecyclerView.Adapter<RaceAddShipViewHolder>() {

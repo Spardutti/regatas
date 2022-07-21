@@ -21,4 +21,7 @@
     <string name="save_changes">Save changes</string>
     <string name="pending">Pending</string>
     <string name="race_finished">Finished</string>
+    <string name="please_select_wich_of_this_boats_did_not_sail">Please select wich of this boats did not sail</string>
+    <string name="did_not_finish">Did Not Finish</string>
+    <string name="did_not_sail">Did Not Sail</string>
 </resources>

@@ -37,18 +37,21 @@
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/layout/ship_list.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/menu/race_menu.xml" value="0.9" />
         <entry key="..\:/Users/luisd/AndroidStudioProjects/regatas/app/src/main/res/menu/ship_menu.xml" value="0.3388888888888889" />
+        <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/drawable/ic_stopstop.xml" value="0.26" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/drawable/ic_timer_start.xml" value="0.26" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/drawable/input_field.xml" value="0.3675" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/cards_races.xml" value="0.21467391304347827" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/cards_winner.xml" value="0.21467391304347827" />
+        <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/dialog_dnf_ships.xml" value="0.33" />
+        <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/dialog_edit_race.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_add_race.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_add_ship_to_race.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_add_ships_empty.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_empty_home.xml" value="0.365625" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_home.xml" value="0.34644913627639157" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_race.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_race_detail.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_race_detail.xml" value="0.5185995623632386" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/fragment_ship.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/list_addship.xml" value="0.5" />
         <entry key="..\:/Users/luisd/StudioProjects/regatas/app/src/main/res/layout/list_race.xml" value="0.9" />

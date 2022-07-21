@@ -10,4 +10,5 @@ data class ShipData(
     var isFinished: Boolean = false,
     var avatar: String?,
     var isSelected: Boolean = false,
+    var dns: Boolean = false
 )

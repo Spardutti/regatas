@@ -4,19 +4,19 @@ import android.app.Dialog
 import android.os.Bundle
 import android.os.Environment
 import android.os.SystemClock
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.marginStart
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.regatas.R
+import com.example.regatas.`interface`.RaceAddShipInterface
 import com.example.regatas.`interface`.RaceShipListInterface
+import com.example.regatas.adapters.races.RaceAddShipAdapter
 import com.example.regatas.adapters.raceshiplist.RaceShipListAdapter
 import com.example.regatas.data.RaceData
 import com.example.regatas.data.ShipData
@@ -26,18 +26,22 @@ import com.example.regatas.utils.Utils
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.io.*
+import kotlin.math.absoluteValue
 
 
-class RaceDetailFragment : Fragment(), RaceShipListInterface {
+class RaceDetailFragment : Fragment(), RaceShipListInterface, RaceAddShipInterface {
 
     lateinit var binding: FragmentRaceDetailBinding
     private lateinit var raceInfo: RaceData
     private var isActive = false
-    lateinit var timer: Chronometer
-    lateinit var startStop: ImageView
-    var timeWhenStopped: Long = 0
+    private lateinit var timer: Chronometer
+    private lateinit var startStop: ImageView
+    private var timeWhenStopped: Long = 0
     var shipList: MutableList<ShipData> = mutableListOf()
+    private var dnfShipList: MutableList<ShipData> = mutableListOf()
+    var dnsShipList: MutableList<ShipData> = mutableListOf()
     private var shipsFinishedCount = 0
+    private lateinit var addShipInterface: RaceAddShipInterface
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,10 +60,11 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         /* gets data from previous fragment */
         getArgs()
 
-        initRecyclerView()
+        if (!raceInfo.isFinished) recyclersInit(shipList, binding.recyclerRaceShipList)
+        else shipListSelector()
 
-        if (binding.imageStartStop.visibility == View.GONE) {
-            centerTimer()
+        if (binding.imageStartStop.visibility == View.VISIBLE) {
+//            centerTimer()
         }
 
 //        /* ONChange listener for editText */
@@ -84,24 +89,8 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         return binding.root
     }
 
-    // set format to HH:MM:SS
-    fun chronoMeterFormat() {
-        timer.setOnChronometerTickListener {
-            val time = SystemClock.elapsedRealtime() - timer.base
-            val hours = (time / 3600000)
-            val minutes = (time - hours * 3600000) / 60000
-            val seconds = (time - hours * 3600000 - minutes * 60000) / 1000
-            val timeString =
-                "${if (hours < 10) "0$hours" else hours}:${if (minutes < 10) "0${minutes}" else minutes}:${if (seconds < 10) "0$seconds" else seconds}"
-
-            timer.setText(timeString)
-        }
-        timer.setBase(SystemClock.elapsedRealtime())
-        timer.text = ("00:00:00")
-    }
-
     /* Get the args from the clicked race on the previous fragment */
-    fun getArgs() {
+    private fun getArgs() {
         val args = this.arguments?.getString("raceInfo")
         val type = object : TypeToken<RaceData>() {}.type
         raceInfo = Gson().fromJson(args, type)
@@ -116,39 +105,39 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
     }
 
     /* start stop chrono timer */
-    fun chronoController() {
+    private fun chronoController() {
         if (!isActive) startTimer()
         else finishRaceDialog(timer.text.toString())
     }
 
-    fun startTimer() {
+    private fun startTimer() {
         startStop.setImageResource(R.drawable.ic_stopstop)
         timer.base = SystemClock.elapsedRealtime() + timeWhenStopped
         timer.start()
         isActive = true
     }
 
-    fun initRecyclerView() {
-        if (shipList.size > 0) {
+    private fun recyclersInit(ships: MutableList<ShipData>, recyclerView: RecyclerView) {
+        if (ships.size > 0) {
             if (raceInfo.isFinished) {
-                shipList.sortWith(compareBy({ !it.isFinished }, { it.time }))
+                ships.sortWith(compareBy({ !it.isFinished }, { it.time }))
             } else {
-                shipList.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
+                ships.sortWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
             }
-            val adapter = RaceShipListAdapter(shipList)
+            val adapter = RaceShipListAdapter(ships)
             adapter.setOnShipTime(this)
-            binding.recyclerRaceShipList.layoutManager = LinearLayoutManager(requireContext())
-            binding.recyclerRaceShipList.adapter = adapter
+            recyclerView.layoutManager = LinearLayoutManager(requireContext())
+            recyclerView.adapter = adapter
         }
-
     }
 
     /* Assigns the current time to the clicked ships, and set isFinished to true.
     * if all ships are isFinished, ends the race */
     override fun onShipStopped(pos: Int) {
+        if (!isActive) return
         if (raceInfo.isFinished) Toast.makeText(
             requireContext(),
-            "La carrera ya ha terminado",
+            "Race finished",
             Toast.LENGTH_SHORT
         ).show()
         else {
@@ -187,7 +176,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         val yesBtn = dialog.findViewById(R.id.btnYes) as TextView
         val noBtn = dialog.findViewById(R.id.btnNo) as TextView
         yesBtn.setOnClickListener {
-            completeRaceAndUpdateInfo(title)
+            dnfDialog()
             dialog.dismiss()
         }
         noBtn.setOnClickListener {
@@ -197,9 +186,70 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         dialog.show()
     }
 
+    /* shows pop up with ships that did not finish the race
+    * you can either add them to DNS or DNF */
+    private fun dnfDialog() {
+        val dialog = Dialog(requireContext())
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(false)
+        dialog.setContentView(R.layout.dialog_dnf_ships)
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+        val dnfRecyclerView = dialog.findViewById(R.id.recylerDNS) as RecyclerView
+
+        dnfShips(dnfRecyclerView)
+        val yesBtn = dialog.findViewById(R.id.btnYes) as TextView
+        val noBtn = dialog.findViewById(R.id.btnNo) as TextView
+        yesBtn.setOnClickListener {
+            raceInfo.isFinished = true
+            shipListSelector()
+            dialog.dismiss()
+        }
+        noBtn.setOnClickListener {
+            timer.start()
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+    /*TODO finish the race and save info*/
+
+    /* divide the ship list into finished, dns, dnf*/
+    private fun shipListSelector() {
+        val finishedShips = shipList.filter { it.isFinished } as MutableList
+        binding.recyclerRaceShipList.adapter = RaceShipListAdapter(finishedShips)
+        if (raceInfo.isFinished) {
+            recyclersInit(finishedShips, binding.recyclerRaceShipList)
+        }
+
+        val dnfShips = dnfShipList.filter { !it.dns } as MutableList
+        if (dnfShips.size > 0) {
+            recyclersInit(dnfShips, binding.recyclerDNF)
+            binding.dnfConstraint.visibility = View.VISIBLE
+        }
+
+        if (dnsShipList.size > 0) {
+            recyclersInit(dnsShipList, binding.recyclerDNS)
+            binding.dnsConstraint.visibility = View.VISIBLE
+        }
+    }
+
+    /* creates the list with ships that did not finish */
+    private fun dnfShips(recyclerView: RecyclerView) {
+        dnfShipList = shipList.filter { !it.isFinished } as MutableList
+        for (ship in dnfShipList) {
+            ship.isSelected = false
+        }
+        val adapter = RaceAddShipAdapter(dnfShipList)
+        adapter.setOnShipSelected(this)
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = adapter
+    }
+
     /* Finish the race and update the information
     * hides the start-stop button */
-    fun completeRaceAndUpdateInfo(time: String) {
+    private fun completeRaceAndUpdateInfo(time: String) {
         isActive = false
         timeWhenStopped = timer.base - SystemClock.elapsedRealtime()
         raceInfo.time = time
@@ -207,7 +257,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         binding.imageStartStop.visibility = View.GONE
         centerTimer()
         for (ship in shipList) {
-            if (ship.isFinished == false) {
+            if (!ship.isFinished) {
                 ship.time = "N/A"
                 ship.isFinished = true
             }
@@ -220,8 +270,8 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
 
 
     /* Center time when start/stop is gone*/
-    fun centerTimer() {
-        val constraintLayout = binding.parent
+    private fun centerTimer() {
+        val constraintLayout = binding.mainConstraint
         val constraintSet = ConstraintSet()
         constraintSet.clone(constraintLayout)
         constraintSet.connect(
@@ -272,7 +322,7 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         dialog.show()
     }
 
-    fun deleteRace() {
+    private fun deleteRace() {
         val storageRaces = Prefs(requireContext()).getRacesFromStorage()
         val racesIterator = storageRaces?.iterator()
         while (racesIterator!!.hasNext()) {
@@ -280,7 +330,11 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
             if (race == raceInfo) {
                 racesIterator.remove()
                 Prefs(requireContext()).saveRace(storageRaces)
-                Toast.makeText(requireContext(), "Carrera ${raceInfo.name} eliminada", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Carrera ${raceInfo.name} eliminada",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Navigation.findNavController(requireView())
                     .navigate(R.id.action_raceDetailFragment_to_raceFragment)
                 Navigation.findNavController(requireView()).popBackStack()
@@ -397,7 +451,8 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         }
     }
 
-    fun parseRaceInfoAndNavigate(toFragmentAction: Int) {
+    // goes to edit race with current race info
+    private fun parseRaceInfoAndNavigate(toFragmentAction: Int) {
         val newName = raceInfo.name
         val newDate = raceInfo.date
         val parsedData = Gson().toJson(raceInfo, object : TypeToken<RaceData>() {}.type)
@@ -408,5 +463,32 @@ class RaceDetailFragment : Fragment(), RaceShipListInterface {
         val fragment = RaceDetailFragment()
         fragment.arguments = bundle
         Utils.navigateTo(requireActivity(), toFragmentAction, bundle)
+    }
+
+    // set format to HH:MM:SS
+    private fun chronoMeterFormat() {
+        timer.setOnChronometerTickListener {
+            val time = SystemClock.elapsedRealtime() - timer.base
+            val hours = (time / 3600000)
+            val minutes = (time - hours * 3600000) / 60000
+            val seconds = (time - hours * 3600000 - minutes * 60000) / 1000
+            val timeString =
+                "${if (hours < 10) "0$hours" else hours}:${if (minutes < 10) "0${minutes}" else minutes}:${if (seconds < 10) "0$seconds" else seconds}"
+
+            timer.setText(timeString)
+        }
+        timer.setBase(SystemClock.elapsedRealtime())
+        timer.text = ("00:00:00")
+    }
+
+    override fun selectShip(ship: ShipData, pos: Int) {
+        if (ship.isSelected) {
+            dnsShipList.remove(ship)
+            ship.dns = false
+        } else {
+            dnsShipList.add(ship)
+            ship.dns = true
+        }
+        ship.isSelected = !ship.isSelected
     }
 }

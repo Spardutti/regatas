@@ -15,10 +15,10 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(shipList: ShipData) {
         binding.textShipName.text = shipList.name
-        if (shipList.time != null) binding.textTime.text = "Tiempo: ${shipList.time}"
+        if (shipList.time != null) binding.textTime.text =  shipList.time
 
         if (shipList.isFinished) {
-            binding.imageFinish.setImageResource(R.drawable.ic_finish_race)
+            binding.imageFinish.setImageResource(R.drawable.ic_race_finished)
         } else {
             binding.imageFinish.setOnClickListener {
                 raceShipList.onShipStopped(absoluteAdapterPosition)
@@ -28,6 +28,8 @@ class RaceShipListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if(shipList.avatar != "null") {
             binding.imageShipImg.setImageURI(Uri.parse(shipList.avatar))
         }
+
+        if(shipList.dns) binding.imageFinish.setImageResource(R.drawable.ic_dns)
     }
 
     fun setOnShipTime(raceShipListInterface: RaceShipListInterface) {
